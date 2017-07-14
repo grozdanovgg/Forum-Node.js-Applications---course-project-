@@ -5,7 +5,10 @@ const attach = (app) => {
     router
         .get('/', (req, res) => {
             res.render('home');
-        });
+        })
+        .get('/test', (req, res) => {
+            res.render('test');
+        })
     app.use('/', router);
 }
 
