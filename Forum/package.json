@@ -1,4 +1,8 @@
 {
+    "scripts": {
+        "n": "node app.js",
+        "start": "./node_modules/.bin/nodemon app.js"
+    },
     "dependencies": {
         "bootstrap": "^3.3.7",
         "express": "^4.15.3",
