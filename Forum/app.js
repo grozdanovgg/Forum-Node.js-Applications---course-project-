@@ -11,11 +11,15 @@ app.use('/libs', express.static(path.join(__dirname, './node_modules')));
 
 attach(app);
 
-const db = require('./database/mongodb');
+//Tutorial for using database
+
+/*const db = require('./database/mongodb');
 const database = new db('mongodb://localhost/items-db');
 const record = {
-    text: 'Yay'
+    title: 'My very second post'
 };
-database.showAll('items');
+
+database.insert('posts', record).then((posts) => console.log(posts));*/
+
 
 app.listen(3001, () => console.log('Magic is running at 3001'));

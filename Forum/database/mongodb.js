@@ -6,87 +6,79 @@ const database = class Database {
     }
 
     insert(collection, record) {
-        MongoClient.connect(this.connectionString)
-            .then(db => {
-                const insertCollection = db.collection(collection);
-
-                insertCollection.insert(record);
-
-                return insertCollection
-                    .find()
-                    .toArray();
-            })
-            .then(items => {
-                console.log(items);
-            });
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(this.connectionString)
+                .then(db => {
+                    const insertCollection = db.collection(collection);
+                    insertCollection.insert(record);
+                    resolve(insertCollection
+                        .find()
+                        .toArray());
+                });
+        })
     }
 
     update(collection, filter, record) {
-        MongoClient.connect(this.connectionString)
-            .then(db => {
-                const updateCollection = db.collection(collection);
-
-                updateCollection.update(filter, record);
-
-                return updateCollection
-                    .find()
-                    .toArray();
-            })
-            .then(items => {
-                console.log(items);
-            });
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(this.connectionString)
+                .then(db => {
+                    const updateCollection = db.collection(collection);
+                    updateCollection.update(filter, record);
+                    resolve(updateCollection
+                        .find()
+                        .toArray());
+                });
+        })
     }
 
     showAll(collection) {
-        MongoClient.connect(this.connectionString)
-            .then(db => {
-                const showCollection = db.collection(collection);
-                return showCollection
-                    .find()
-                    .toArray();
-            }).then(items => {
-                console.log(items);
-            });
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(this.connectionString)
+                .then(db => {
+                    const showCollection = db.collection(collection)
+                        .find()
+                        .toArray();
+                    resolve(showCollection);
+                });
+        })
     }
 
     find(collection, filter) {
-        MongoClient.connect(this.connectionString)
-            .then(db => {
-                const showCollection = db.collection(collection);
-                return showCollection
-                    .find(filter)
-                    .toArray();
-            }).then(items => {
-                console.log(items);
-            });
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(this.connectionString)
+                .then(db => {
+                    const findCollection = db.collection(collection)
+                        .find(filter)
+                        .toArray();
+                    resolve(findCollection);
+                });
+        })
     }
 
     delete(collection, filter) {
-        MongoClient.connect(this.connectionString)
-            .then(db => {
-                const deleteCollection = db.collection(collection);
-                deleteCollection.deleteMany(filter);
-
-                return deleteCollection
-                    .find()
-                    .toArray();
-            }).then(items => {
-                console.log(items);
-            });
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(this.connectionString)
+                .then(db => {
+                    const deleteCollection = db.collection(collection);
+                    deleteCollection.deleteMany(filter);
+                    resolve(deleteCollection
+                        .find()
+                        .toArray());
+                });
+        })
     }
 
     deleteAll(collection) {
-        MongoClient.connect(this.connectionString)
-            .then(db => {
-                const deleteCollection = db.collection(collection);
-                deleteCollection.deleteMany({});
-
-                return deleteCollection
-                    .find()
-                    .toArray();
-            }).then(items => {
-                console.log(items);
-            });
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(this.connectionString)
+                .then(db => {
+                    const deleteCollection = db.collection(collection);
+                    deleteCollection.deleteMany({});
+                    resolve(deleteCollection
+                        .find()
+                        .toArray());
+                });
+        })
     }
 }
 
