@@ -133,3 +133,74 @@ body {
 .square:hover .ninth:after {
     width: 100%;
 }
+
+.naveffect a {
+    position: relative;
+    display: inline-block;
+    outline: none;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+    font-size: 1em;
+}
+
+.naveffect a:hover,
+.naveffect a:focus {
+    outline: none;
+}
+
+.naveffect a span {
+    position: relative;
+    display: inline-block;
+    padding: 3px 15px 0;
+    background: #292B2C;
+    box-shadow: inset 0 3px #2f4351;
+    -webkit-transition: background 0.6s;
+    -moz-transition: background 0.6s;
+    transition: background 0.6s;
+    -webkit-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    -moz-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+}
+
+.naveffect a span::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #d73444;
+    color: white;
+    content: attr(data-hover);
+    -webkit-transform: rotateX(270deg);
+    -moz-transform: rotateX(270deg);
+    transform: rotateX(270deg);
+    -webkit-transition: -webkit-transform 0.6s;
+    -moz-transition: -moz-transform 0.6s;
+    transition: transform 0.6s;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    transform-origin: 0 0;
+    pointer-events: none;
+}
+
+.naveffect a:hover span,
+.naveffect a:focus span {
+    background: #2f4351;
+}
+
+.naveffect a:hover span::before,
+.naveffect a:focus span::before {
+    -webkit-transform: rotateX(10deg);
+    -moz-transform: rotateX(10deg);
+    transform: rotateX(10deg);
+}

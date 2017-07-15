@@ -9,6 +9,7 @@ html(lang='en')
 		// Bootstrap core CSS
 		link(href='/libs/bootstrap/dist/css/bootstrap.css', rel='stylesheet')
 		link(rel="stylesheet", href="/static/css/style.css")
+		link(rel='icon', href='/static/images/icon.png')
 		// Custom styles for this template
 		// Temporary navbar container fix
 		style.
@@ -30,14 +31,17 @@ html(lang='en')
 						a.ninth.before.after(href='#') TellUS
 				#navbarExample.collapse.navbar-collapse
 					ul.navbar-nav.ml-auto
-						li.nav-item.active
+						li.nav-item.naveffect
 							a.nav-link(href='#')
-								| Home 
-								span.sr-only (current)
-						li.nav-item
-							a.nav-link(href='#') About
-						li.nav-item
-							a.nav-link(href='#') Services
-						li.nav-item
-							a.nav-link(href='#') Contact
+								span(data-hover='Home') Home
+						li.nav-item.naveffect
+							a.nav-link(href='#')
+								span(data-hover='About') About
+						li.nav-item.naveffect
+							a.nav-link(href='#')
+								span(data-hover='Services') Services
+						li.nav-item.naveffect
+							a.nav-link(href='#')
+								span(data-hover='Contact') Contact
+								
 	block body
