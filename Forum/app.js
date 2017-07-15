@@ -16,7 +16,8 @@ attach(app);
 /*const db = require('./database/mongodb');
 const database = new db('mongodb://localhost/items-db');
 const record = {
-    title: 'My very second post'
+    title: 'Why does it rain',
+    author: 'Martin Kamenov',
 };
 
 database.insert('posts', record).then((posts) => console.log(posts));*/
