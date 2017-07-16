@@ -8,7 +8,7 @@ const database = class Database {
     insert(collection, record) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(this.connectionString)
-                .then(db => {
+                .then((db) => {
                     const insertCollection = db.collection(collection);
                     insertCollection.insert(record);
                     resolve(insertCollection
@@ -21,7 +21,7 @@ const database = class Database {
     update(collection, filter, record) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(this.connectionString)
-                .then(db => {
+                .then((db) => {
                     const updateCollection = db.collection(collection);
                     updateCollection.update(filter, record);
                     resolve(updateCollection
@@ -34,7 +34,7 @@ const database = class Database {
     showAll(collection) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(this.connectionString)
-                .then(db => {
+                .then((db) => {
                     const showCollection = db.collection(collection)
                         .find()
                         .toArray();
@@ -46,7 +46,7 @@ const database = class Database {
     find(collection, filter) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(this.connectionString)
-                .then(db => {
+                .then((db) => {
                     const findCollection = db.collection(collection)
                         .find(filter)
                         .toArray();
@@ -58,7 +58,7 @@ const database = class Database {
     delete(collection, filter) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(this.connectionString)
-                .then(db => {
+                .then((db) => {
                     const deleteCollection = db.collection(collection);
                     deleteCollection.deleteMany(filter);
                     resolve(deleteCollection
@@ -71,7 +71,7 @@ const database = class Database {
     deleteAll(collection) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(this.connectionString)
-                .then(db => {
+                .then((db) => {
                     const deleteCollection = db.collection(collection);
                     deleteCollection.deleteMany({});
                     resolve(deleteCollection
@@ -80,6 +80,6 @@ const database = class Database {
                 });
         });
     }
-}
+};
 
 module.exports = database;

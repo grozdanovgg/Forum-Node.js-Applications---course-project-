@@ -4,6 +4,9 @@
         "start": "./node_modules/.bin/nodemon app.js"
     },
     "dependencies": {
+        "babel-eslint": "^7.2.3",
+        "eslint": "^4.2.0",
+        "eslint-config-google": "^0.9.1",
         "express": "^4.15.3",
         "global": "^4.3.2",
         "jquery": "^3.2.1",
