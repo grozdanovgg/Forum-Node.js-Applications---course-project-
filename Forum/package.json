@@ -9,8 +9,7 @@
         "jquery": "^3.2.1",
         "mongodb": "^2.2.30",
         "pug": "^2.0.0-rc.2",
-        "tether": "^1.4.0",
-        "yarn": "^0.27.5"
+        "tether": "^1.4.0"
     },
     "devDependencies": {
         "bootstrap": "4.0.0-alpha.6"

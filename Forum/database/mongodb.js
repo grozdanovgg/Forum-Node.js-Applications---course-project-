@@ -15,7 +15,7 @@ const database = class Database {
                         .find()
                         .toArray());
                 });
-        })
+        });
     }
 
     update(collection, filter, record) {
@@ -28,7 +28,7 @@ const database = class Database {
                         .find()
                         .toArray());
                 });
-        })
+        });
     }
 
     showAll(collection) {
@@ -40,7 +40,7 @@ const database = class Database {
                         .toArray();
                     resolve(showCollection);
                 });
-        })
+        });
     }
 
     find(collection, filter) {
@@ -52,7 +52,7 @@ const database = class Database {
                         .toArray();
                     resolve(findCollection);
                 });
-        })
+        });
     }
 
     delete(collection, filter) {
@@ -65,7 +65,7 @@ const database = class Database {
                         .find()
                         .toArray());
                 });
-        })
+        });
     }
 
     deleteAll(collection) {
@@ -78,7 +78,7 @@ const database = class Database {
                         .find()
                         .toArray());
                 });
-        })
+        });
     }
 }
 
