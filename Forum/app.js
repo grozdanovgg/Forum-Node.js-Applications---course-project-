@@ -1,4 +1,4 @@
-/*globals __dirname */
+/* globals __dirname */
 
 const express = require('express');
 const attach = require('./public/routes/app-route');
@@ -11,17 +11,14 @@ app.use('/libs', express.static(path.join(__dirname, './node_modules')));
 
 attach(app);
 
-//Tutorial for using database
+// Tutorial for using database
 
-const db = require('./database/mongodb');
-const database = new db('mongodb://localhost/items-db');
-const record = {
-    title: 'Why does it rain',
-    author: 'Martin Kamenov',
-};
+const Db = require('./database/mongodb');
+const database = new Db('mongodb://localhost/items-db');
+
 
 database.deleteAll('posts');
-for (var i = 0; i < 16; i++) {
+for (let i = 0; i < 16; i++) {
     const record = {
         title: i + 1,
         author: 'Martin Kamenov',
