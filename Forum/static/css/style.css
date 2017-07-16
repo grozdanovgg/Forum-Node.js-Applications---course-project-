@@ -204,3 +204,13 @@ body {
     -moz-transform: rotateX(10deg);
     transform: rotateX(10deg);
 }
+
+.error-message {
+    font-size: 2em;
+    color: #d73444;
+}
+
+.success-message {
+    font-size: 2em;
+    color: green;
+}
