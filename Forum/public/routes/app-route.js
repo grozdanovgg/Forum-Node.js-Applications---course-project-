@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const Database = require('../../database/mongodb');
+const database = require('../../database/mongodb');
 const connectionString = 'mongodb://localhost/items-db';
 
 const attach = (app) => {
-    const db = new Database(connectionString);
+    const db = new database(connectionString);
     const router = new Router();
     router
         .get('/', (req, res) => {
@@ -22,27 +22,42 @@ const attach = (app) => {
 
             db.showAll('posts')
                 .then((posts) => {
-                    let i = 1;
-                    const showposts = [];
+                    var i = 1;
+                    var showposts = [];
                     const size = 5;
-                    let index = (i + ((page - 1) * size) - 1);
+                    var pagesNum = Math.ceil(posts.length / size);
+                    if (page < 1 || page > pagesNum) {
+                        res.redirect('404');
+                    }
+
+                    var index = (i + ((page - 1) * size) - 1)
                     while (index < posts.length && i <= size) {
                         showposts.push(posts[index++]);
                         i++;
                     }
-                    console.log(posts);
-                    res.render('showposts', { showposts });
+                    const showPages = [];
+                    if (page > 1 && page < pagesNum) {
+                        showPages.push(page - 1, page, page + 1);
+                    } else if (page === 1 && pagesNum > 2) {
+                        showPages.push(page, page + 1, page + 2);
+                    } else if (page === pagesNum && pagesNum > 2) {
+                        showPages.push(page - 2, page - 1, page);
+                    } else {
+                        for (var j = 1; j <= pagesNum; j += 1) {
+                            showPages.push(j);
+                        }
+                    }
+                    console.log(pagesNum);
+                    res.render('showposts', { showposts, page, showPages, pagesNum });
                 });
         })
         .get('/register', (req, res) => {
             res.render('register');
         })
-        .post('/register', (req, res) => {
-            res.send(req.body);
-        });
+        .post('/register', (req, res) => { res.send(req.body) });
 
 
     app.use('/', router);
-};
+}
 
 module.exports = attach;

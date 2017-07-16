@@ -23,17 +23,14 @@ block body
         // Pagination
         ul.pagination.justify-content-center
             li.page-item
-                a.page-link(href='#', aria-label='Previous')
+                a.page-link(href='?page=1', aria-label='Previous')
                     span(aria-hidden='true') «
                     span.sr-only Previous
+            each pageN in showPages
+                li.page-item
+                    a.page-link(href='?page='+(pageN))=pageN
             li.page-item
-                a.page-link(href='#') 1
-            li.page-item
-                a.page-link(href='#') 2
-            li.page-item
-                a.page-link(href='#') 3
-            li.page-item
-                a.page-link(href='#', aria-label='Next')
+                a.page-link(href='?page='+(pagesNum), aria-label='Next')
                     span(aria-hidden='true') »
                     span.sr-only Next
     // /.container
