@@ -31,4 +31,7 @@ for (var i = 0; i < 23; i++) {
     database.insert('posts', record).then();
 }*/
 
-app.listen(3001, () => console.log('Magic is running at 3001'));
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log('Magic is running at' + port + '/'));
