@@ -8,25 +8,26 @@ const bodyParser = require('body-parser');
 const Database = require('./database/mongodb');
 
 const app = express();
+const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
 app.set('view engine', 'pug');
 app.use('/static', express.static(path.join(__dirname, './static')));
 app.use('/libs', express.static(path.join(__dirname, './node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
-const database = new Database('mongodb://localhost/items-db');
+const database = new Database(connectionstring);
 
 attach(app, database);
 posts(app, database);
 
 // Tutorial for using database
 
-database.deleteAll('categories');
+/* database.deleteAll('categories');
 const category = {
     title: 'Other',
     posts: [],
 };
 database.insert('categories', category).then();
 
-database.showAll('categories').then((th) => console.log(th));
+database.showAll('categories').then((th) => console.log(th));*/
 
 
 const port = process.env.PORT || 3000;
