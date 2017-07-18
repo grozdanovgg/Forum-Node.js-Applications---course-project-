@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const database = class Database {
     constructor(connectionString) {
@@ -51,7 +51,20 @@ const database = class Database {
                         .find(filter)
                         .toArray();
                     resolve(findCollection);
-                });
+                })
+                .catch(reject);
+        });
+    }
+
+    findOne(collection, filter) {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(this.connectionString)
+                .then((db) => {
+                    const found = db.collection(collection)
+                        .findOne(filter);
+                    resolve(found);
+                })
+                .catch(reject);
         });
     }
 
