@@ -2,7 +2,10 @@ class PageHandler {
     handle(collection, page, size, res) {
         let i = 1;
         const filteredCollection = [];
-        const pagesNum = Math.ceil(collection.length / size);
+        let pagesNum = Math.ceil(collection.length / size);
+        if (pagesNum < 1) {
+            pagesNum = 1;
+        }
         if (page < 1 || page > pagesNum) {
             res.redirect('404');
         }

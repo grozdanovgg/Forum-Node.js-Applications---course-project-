@@ -8,17 +8,29 @@ const attach = (app, db) => {
             const page = pageHandler
                 .choosePage(req.query.page);
 
-            db.showAll('themes')
-                .then((themes) => {
+            db.showAll('categories')
+                .then((categories) => {
                     const size = 8;
                     const pagingResult = pageHandler
-                        .handle(themes, page, size, res);
+                        .handle(categories, page, size, res);
 
-                    const showThemes = pagingResult.filteredCollection;
+                    const showcategories = pagingResult.filteredCollection;
                     const navigationNumbers = pagingResult.navigationNumbers;
                     const pagesNum = pagingResult.numberOfPages;
                     res.render('home', {
-                        showThemes,
+                        showcategories,
+                        page,
+                        navigationNumbers,
+                        pagesNum,
+                    });
+                })
+                .catch(() => {
+                    const showcategories = [];
+                    page = 1;
+                    const navigationNumbers = [];
+                    const pagesNum = 1;
+                    res.render('home', {
+                        showcategories,
                         page,
                         navigationNumbers,
                         pagesNum,
@@ -27,27 +39,6 @@ const attach = (app, db) => {
         })
         .get('/test', (req, res) => {
             res.render('test');
-        })
-        .get('/posts', (req, res) => {
-            const page = pageHandler
-                .choosePage(req.query.page);
-
-            db.showAll('posts')
-                .then((posts) => {
-                    const size = 5;
-                    const pagingResult = pageHandler
-                        .handle(posts, page, size, res);
-
-                    const showposts = pagingResult.filteredCollection;
-                    const showPages = pagingResult.navigationNumbers;
-                    const pagesNum = pagingResult.numberOfPages;
-                    res.render('showposts', {
-                        showposts,
-                        page,
-                        showPages,
-                        pagesNum,
-                    });
-                });
         })
         .get('/register', (req, res) => {
             res.render('register');

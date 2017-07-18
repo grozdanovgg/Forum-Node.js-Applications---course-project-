@@ -2,6 +2,7 @@
 
 const express = require('express');
 const attach = require('./public/routes/app-route');
+const posts = require('./public/routes/posts-route');
 const path = require('path');
 const bodyParser = require('body-parser');
 const Database = require('./database/mongodb');
@@ -14,23 +15,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const database = new Database('mongodb://localhost/items-db');
 
 attach(app, database);
+posts(app, database);
 
 // Tutorial for using database
 
-/*const record = {
-    title: 'Why does it rain',
-    author: 'Martin Kamenov',
+database.deleteAll('categories');
+const category = {
+    title: 'Other',
+    posts: [],
 };
+database.insert('categories', category).then();
 
-database.deleteAll('themes');
-for (let i = 0; i < 23; i++) {
-    const themes = {
-        title: 'Theme number' + i,
-        author: 'Martin Kamenov',
-    };
-    database.insert('themes', themes).then();
-}
-database.showAll('themes').then((th) => console.log(th));*/
+database.showAll('categories').then((th) => console.log(th));
 
 
 const port = process.env.PORT || 3000;

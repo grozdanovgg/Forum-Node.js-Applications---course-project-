@@ -214,3 +214,11 @@ body {
     font-size: 2em;
     color: green;
 }
+
+.red {
+    background-color: #d73444;
+}
+
+.blue {
+    background-color: #1892D8;
+}
