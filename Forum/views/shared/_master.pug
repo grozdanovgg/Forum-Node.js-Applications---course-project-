@@ -31,9 +31,14 @@ html(lang='en')
 						a.ninth.before.after(href='/') TellUS
 				#navbarExample.collapse.navbar-collapse
 					ul.navbar-nav.ml-auto
-						li.nav-item.naveffect
-							a.nav-link(href='/auth/login')
-								span(data-hover='Login') Login
+						if user
+							li.nav-item.naveffect
+								a.nav-link(href='/users/'+user.username)
+									span.blue(data-hover=user.username)=user.username
+						else
+							li.nav-item.naveffect
+								a.nav-link(href='/auth/login')
+									span(data-hover='Login') Login
 						li.nav-item.naveffect
 							a.nav-link(href='#')
 								span(data-hover='About') About

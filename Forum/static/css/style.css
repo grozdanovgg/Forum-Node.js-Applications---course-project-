@@ -193,6 +193,10 @@ body {
     pointer-events: none;
 }
 
+.naveffect a .blue::before {
+    background: #1892D8;
+}
+
 .naveffect a:hover span,
 .naveffect a:focus span {
     background: #2f4351;
@@ -217,8 +221,4 @@ body {
 
 .red {
     background-color: #d73444;
-}
-
-.blue {
-    background-color: #1892D8;
 }
