@@ -33,13 +33,13 @@ const configAuth = (app, database) => {
     app.use(passport.session());
 
     passport.serializeUser((user, done) => {
-        console.log('user id = ' + user._id);
-        done(null, user._id);
+        console.log('user mail = ' + user.email);
+        done(null, user.email);
     });
 
-    passport.deserializeUser((_id, done) => {
-        console.log('second id = ' + _id);
-        database.findOne('users', _id)
+    passport.deserializeUser((email, done) => {
+        console.log('email = ' + email);
+        database.find('users', { email: email })
             .then((users) => {
                 if (users.length < 1) {
                     return done('No such user found.----');
