@@ -33,7 +33,7 @@ html(lang='en')
 					ul.navbar-nav.ml-auto
 						if user
 							li.nav-item.naveffect
-								a.nav-link(href='/users/'+user.username)
+								a.nav-link(href='/users/'+user.email)
 									span.blue(data-hover=user.username)=user.username
 						else
 							li.nav-item.naveffect

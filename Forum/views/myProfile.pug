@@ -1,0 +1,13 @@
+extends shared/_master
+
+block body
+    .container
+        h1.my-4=user.username
+            //small Secondary Text    
+            button.btn.btn-success Settings
+        .row
+            .col-md-5
+                h3='Posts: '
+                a.btn.btn-primary(href='/Posts/') View Posts
+        // /.row
+        hr

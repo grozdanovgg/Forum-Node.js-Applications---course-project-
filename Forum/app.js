@@ -3,6 +3,7 @@
 const express = require('express');
 const appRouth = require('./public/routes/app-route');
 const posts = require('./public/routes/posts-route');
+const users = require('./public/routes/users-route');
 const auth = require('./public/routes/auth-route');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -21,6 +22,7 @@ const database = new Database(connectionstring);
 authConfig(app, database);
 appRouth(app, database);
 posts(app, database);
+users(app, database);
 auth(app);
 
 // Tutorial for using database
