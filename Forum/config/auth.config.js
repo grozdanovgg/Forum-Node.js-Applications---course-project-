@@ -13,7 +13,6 @@ const configAuth = (app, database) => {
                     } else if (users.length > 1) {
                         return done('There is more than one user with this username');
                     } else {
-                        console.log(users[0]);
                         return done(null, users[0]);
                     }
                 })
@@ -33,12 +32,10 @@ const configAuth = (app, database) => {
     app.use(passport.session());
 
     passport.serializeUser((user, done) => {
-        console.log('user mail = ' + user.email);
         done(null, user.email);
     });
 
     passport.deserializeUser((email, done) => {
-        console.log('email = ' + email);
         database.find('users', { email: email })
             .then((users) => {
                 if (users.length < 1) {

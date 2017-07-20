@@ -5,6 +5,9 @@ const attach = (app, db) => {
     const router = new Router();
     router
         .get('/', (req, res) => {
+            const user = req.user;
+            console.log('---current user---');
+            console.log(user);
             const page = pageHandler
                 .choosePage(req.query.page);
 
@@ -22,6 +25,7 @@ const attach = (app, db) => {
                         page,
                         navigationNumbers,
                         pagesNum,
+                        user,
                     });
                 })
                 .catch(() => {
@@ -34,14 +38,18 @@ const attach = (app, db) => {
                         page,
                         navigationNumbers,
                         pagesNum,
+                        user,
                     });
                 });
         })
-        .get('/test', (req, res) => {
-            res.render('test');
-        })
         .get('/register', (req, res) => {
-            res.render('register');
+            const user = req.user;
+            if (user) {
+                res
+                    .render('404');
+            } else {
+                res.render('register');
+            }
         })
         .post('/register', (req, res) => {
             const username = req.body.username;

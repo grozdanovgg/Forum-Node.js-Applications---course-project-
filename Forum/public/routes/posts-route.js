@@ -5,6 +5,7 @@ const attach = (app, db) => {
     const router = new Router();
     router
         .get('/', (req, res) => {
+            const user = req.user;
             const page = pageHandler
                 .choosePage(req.query.page);
 
@@ -23,10 +24,12 @@ const attach = (app, db) => {
                         page,
                         showPages,
                         pagesNum,
+                        user,
                     });
                 });
         })
         .get('/:category', (req, res) => {
+            const user = req.user;
             const category = req.params.category;
 
             const page = pageHandler
@@ -49,6 +52,7 @@ const attach = (app, db) => {
                         page,
                         showPages,
                         pagesNum,
+                        user,
                     });
                 });
         });

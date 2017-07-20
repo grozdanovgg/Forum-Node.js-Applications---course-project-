@@ -1,7 +1,7 @@
 /* globals __dirname */
 
 const express = require('express');
-const attach = require('./public/routes/app-route');
+const appRouth = require('./public/routes/app-route');
 const posts = require('./public/routes/posts-route');
 const auth = require('./public/routes/auth-route');
 const path = require('path');
@@ -11,21 +11,16 @@ const Database = require('./database/mongodb');
 
 const app = express();
 const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
+// const connectionstring = 'mongodb://localhost/items-db';
 app.set('view engine', 'pug');
 app.use('/static', express.static(path.join(__dirname, './static')));
 app.use('/libs', express.static(path.join(__dirname, './node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
 const database = new Database(connectionstring);
 
-app.use((req, res, next) => {
-    console.log('---Current user---');
-    console.log(req.user);
-    next();
-});
-
-attach(app, database);
-posts(app, database);
 authConfig(app, database);
+appRouth(app, database);
+posts(app, database);
 auth(app);
 
 // Tutorial for using database
