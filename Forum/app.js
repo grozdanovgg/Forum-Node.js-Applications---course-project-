@@ -20,7 +20,7 @@ app.use('/libs', express.static(path.join(__dirname, './node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
 const database = new Database(connectionstring);
 
-/*const category1 = {
+/* const category1 = {
     title: 'Animals',
     posts: [],
 };
@@ -30,7 +30,7 @@ authConfig(app, database);
 appRouth(app, database);
 posts(app, database);
 users(app, database);
-auth(app);
+auth(app, database);
 
 database.delete('user', { username: 'MartoG' }).then((u) => console.log(u));
 database.deleteAll('posts/sport').then((u) => console.log(u));
