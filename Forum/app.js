@@ -32,8 +32,9 @@ posts(app, database);
 users(app, database);
 auth(app, database);
 
-database.delete('user', { username: 'MartoG' }).then((u) => console.log(u));
-database.deleteAll('posts/sport').then((u) => console.log(u));
+// database.showAll('users').then(u => console.log(u));
+database.deleteAll('posts/Sport');
+database.deleteAll('users');
 
 
 // Tutorial for using database

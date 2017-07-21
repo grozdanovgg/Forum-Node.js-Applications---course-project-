@@ -42,7 +42,7 @@ const attach = (app, db) => {
                     const message = 'There is user with this username!';
                     res.render('register', { message });
                 }
-                const newUser = { username, password, email, repeatpassword, posts };
+                const newUser = { username, password, email, posts };
                 db.insert('users', newUser).then(() => {
                     const message = 'Successfully Registered';
                     res.render('postRegister', { message });

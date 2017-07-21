@@ -97,8 +97,8 @@ const attach = (app, db) => {
                         const changingUser = users[0];
                         changingUser.posts.push(newPost);
                         db.delete('users', { username: user.username })
-                            .then(db.insert('users', changingUser));
-                    })
+                            .then(() => db.insert('users', changingUser));
+                    });
                 });
         });
 
