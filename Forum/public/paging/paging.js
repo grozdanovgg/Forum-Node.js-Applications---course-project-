@@ -32,7 +32,7 @@ class PageHandler {
             filteredCollection: filteredCollection,
             numberOfPages: pagesNum,
             navigationNumbers: showPages,
-        }
+        };
     }
 
     choosePage(page) {

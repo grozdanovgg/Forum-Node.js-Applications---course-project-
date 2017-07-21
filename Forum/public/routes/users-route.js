@@ -14,6 +14,6 @@ const attach = (app, database) => {
         });
 
     app.use('/users', router);
-}
+};
 
 module.exports = attach;

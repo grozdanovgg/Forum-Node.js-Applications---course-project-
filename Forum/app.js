@@ -1,4 +1,5 @@
-/* globals __dirname */
+/* globals __dirname, process  */
+/* eslint no-process-env: off*/
 
 const express = require('express');
 const appRouth = require('./public/routes/app-route');

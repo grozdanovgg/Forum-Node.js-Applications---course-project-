@@ -11,10 +11,11 @@ const configAuth = (app, database) => {
                     if (users.length < 1) {
                         return done('No such user found.');
                     } else if (users.length > 1) {
-                        return done('There is more than one user with this username');
-                    } else {
-                        return done(null, users[0]);
+                        return done(
+                            'There is more than one user with this username'
+                        );
                     }
+                    return done(null, users[0]);
                 })
                 .catch((ex) => {
                     return done(ex);
@@ -42,13 +43,11 @@ const configAuth = (app, database) => {
                     return done('No such user found.----');
                 } else if (users.length > 1) {
                     return done('There is more than one user with this id');
-                } else {
-                    return done(null, users[0]);
                 }
+                return done(null, users[0]);
             })
             .catch(() => done('Problem with id'));
     });
-
 };
 
 module.exports = configAuth;
