@@ -11,7 +11,10 @@ const attach = (app) => {
             successRedirect: '/',
             failureRedirect: '/auth/login',
             failureFlash: true,
-        }));
+        }))
+        .get('/register', (req, res) => {
+            return res.render('register');
+        });
 
     app.use('/auth', router);
 };

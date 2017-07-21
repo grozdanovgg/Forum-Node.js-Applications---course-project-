@@ -35,10 +35,16 @@ html(lang='en')
 							li.nav-item.naveffect
 								a.nav-link(href='/users/'+user.email)
 									span.blue(data-hover=user.username)=user.username
+							li.nav-item.naveffect
+								a.nav-link(href='/users/settings')
+									span(data-hover='Settings') Settings
 						else
 							li.nav-item.naveffect
 								a.nav-link(href='/auth/login')
 									span(data-hover='Login') Login
+							li.nav-item.naveffect
+								a.nav-link(href='/auth/register')
+									span(data-hover='Register') Register
 						li.nav-item.naveffect
 							a.nav-link(href='#')
 								span(data-hover='About') About
