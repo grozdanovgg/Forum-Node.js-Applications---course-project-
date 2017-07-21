@@ -9,5 +9,17 @@ block body
             .col-md-5
                 h3='Posts: '
                 a.btn.btn-primary(href='/Posts/') View Posts
+        each post in user.posts
+            // Project One
+            .row
+                .col-md-7
+                    a(href='#')
+                        img.img-fluid.rounded.mb-3.mb-md-0(src='http://placehold.it/700x300', alt='')
+                .col-md-5
+                    h3=post.title
+                    p=post.author
+                    a.btn.btn-primary(href='#') View Post
+            // /.row
+            hr
         // /.row
         hr

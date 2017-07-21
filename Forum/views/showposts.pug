@@ -4,9 +4,29 @@ block body
     // Page Content
     .container
         // Page Heading
-        h1.my-4
-            | Page Heading 
-            small Secondary Text
+        h1.my-4=category+' posts'
+        if user
+            .row
+                .col-md-5
+                    form.form-horizontal(action='', method='POST')
+                        .control-group
+                            // Title
+                            label.control-label(for='title') Title
+                            .controls
+                                input#title.input-xlarge(type='text', name='title', placeholder='', value=title)
+                        .control-group
+                            // Post
+                            label.control-label(for='post') Post
+                            .controls
+                                input#post.input-xlarge(type='text', name='post', placeholder='', value=post)
+                        .control-group
+                            // Button
+                            .controls
+                                button.btn.btn-success(type='submit', value='submit') Add Post
+                br
+            // /.row
+            hr
+
         each post in showposts
             // Project One
             .row
@@ -19,15 +39,7 @@ block body
                     a.btn.btn-primary(href='#') View Post
             // /.row
             hr
-        if true
-            .row
-                .col-md-7
-                    a(href='#')
-                        img.img-fluid.rounded.mb-3.mb-md-0(src='http://placehold.it/700x300', alt='')
-                .col-md-5
-                    a.btn.btn-primary(href='/Posts/Add') Add Post
-            // /.row
-            hr
+        
         
         // Pagination
         ul.pagination.justify-content-center

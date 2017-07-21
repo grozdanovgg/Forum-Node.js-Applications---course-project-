@@ -20,11 +20,21 @@ app.use('/libs', express.static(path.join(__dirname, './node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
 const database = new Database(connectionstring);
 
+/*const category1 = {
+    title: 'Animals',
+    posts: [],
+};
+database.insert('categories', category1).then((c) => console.log(c));*/
+
 authConfig(app, database);
 appRouth(app, database);
 posts(app, database);
 users(app, database);
 auth(app);
+
+database.delete('user', { username: 'MartoG' }).then((u) => console.log(u));
+database.deleteAll('posts/sport').then((u) => console.log(u));
+
 
 // Tutorial for using database
 

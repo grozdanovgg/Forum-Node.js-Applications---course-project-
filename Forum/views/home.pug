@@ -10,12 +10,9 @@ block body
         each category in showcategories
             // Project One
             .row
-                .col-md-7
-                    a(href='#')
-                        img.img-fluid.rounded.mb-3.mb-md-0(src='http://placehold.it/700x300', alt='')
                 .col-md-5
                     h3=category.title
-                    p='Posts: '+category.posts.length
+                    p=category.bio
                     a.btn.btn-primary(href='/Posts/'+category.title) View Posts
             // /.row
             hr

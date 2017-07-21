@@ -56,6 +56,7 @@ const attach = (app, db) => {
             const password = req.body.password;
             const email = req.body.email;
             const repeatpassword = req.body.password_confirm;
+            const posts = [];
             if (!password || !username || !email || !repeatpassword) {
                 const message = 'All fields are required!';
                 res.render('register', { message });
@@ -71,7 +72,7 @@ const attach = (app, db) => {
                     const message = 'There is user with this username!';
                     res.render('register', { message });
                 }
-                const newUser = { username, password, email, repeatpassword };
+                const newUser = { username, password, email, repeatpassword, posts };
                 db.insert('users', newUser).then(() => {
                     const message = 'Successfully Registered';
                     res.render('postRegister', { message });
