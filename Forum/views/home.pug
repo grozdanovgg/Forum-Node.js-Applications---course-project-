@@ -11,9 +11,9 @@ block body
             // Project One
             .row
                 .col-md-5
-                    h3=category.title
-                    p=category.bio
-                    a.btn.btn-primary(href='/Posts/'+category.title) View Posts
+                    a(href='/Posts/'+category.title)
+                        h3=category.title
+                        img(src="/static/images/categories/"+category.title+".jpg")
             // /.row
             hr
         
@@ -21,7 +21,7 @@ block body
         ul.pagination.justify-content-center
             li.page-item
                 a.page-link(href='?page=1', aria-label='Previous')
-                    span(aria-hidden='true') «
+                    span(aria-hidden='true')
                     span.sr-only Previous
             each pageN in navigationNumbers
                 li.page-item
