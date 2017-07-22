@@ -21,6 +21,7 @@ html(lang='en')
 			width: 100%;
 			}
 			}
+
 	body
 		nav.navbar.fixed-top.navbar-toggleable-md.navbar-inverse.bg-inverse
 			button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarExample', aria-controls='navbarExample', aria-expanded='false', aria-label='Toggle navigation')
@@ -54,6 +55,7 @@ html(lang='en')
 						li.nav-item.naveffect
 							a.nav-link(href='#')
 								span(data-hover='Contact') Contact
+		
 								
 	block body
 
@@ -61,7 +63,28 @@ html(lang='en')
 	footer.py-5.bg-inverse
 		.container
 			p.m-0.text-center.text-white Copyright © Tell Us 2017
-		// /.container
+		.container
+			// Websocket Chat:
+			<ul id="messages"></ul>
+			<form action="">
+				<input id="m" autocomplete="off" /><button>Send</button>
+			</form>
+	//Web Socket script 
+	script(src='/socket.io/socket.io.js')
+	script(src='https://code.jquery.com/jquery-1.11.1.js')
+	script.
+		$(function () {
+		var socket = io();
+		$('form').submit(function(){
+		socket.emit('chat message', $('#m').val());
+		$('#m').val('');
+		return false;
+		});
+		socket.on('chat message', function(msg){
+		$('#messages').append($('<li>').text(msg));
+		});
+		});
+
 	// Bootstrap core JavaScript
 	script(src='/static/js/jquery.min.js')
 	script(src='/static/js/tether.min.js')

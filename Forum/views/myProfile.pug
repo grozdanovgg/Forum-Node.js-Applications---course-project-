@@ -3,8 +3,12 @@ extends shared/_master
 block body
     .container
         h1.my-4=user.username
-            //small Secondary Text    
-            button.btn.btn-success Settings
+        
+        //small Secondary Text
+        h3='E-mail: ' + user.username
+        // To be implemented correctly - with real picture:
+        h3='Profile picture: ' + user.pic
+        button.btn.btn-success Settings
         .row
             .col-md-5
                 h3='Posts: '

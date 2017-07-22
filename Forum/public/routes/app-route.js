@@ -10,7 +10,6 @@ const attach = (app, db) => {
             console.log(user);
             const page = pageHandler
                 .choosePage(req.query.page);
-
             db.showAll('categories')
                 .then((categories) => {
                     const size = 8;
