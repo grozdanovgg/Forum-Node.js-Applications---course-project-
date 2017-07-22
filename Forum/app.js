@@ -33,8 +33,6 @@ users(app, database);
 auth(app, database);
 
 // database.showAll('users').then(u => console.log(u));
-database.deleteAll('posts/Sport');
-database.deleteAll('users');
 
 
 // Tutorial for using database
@@ -47,7 +45,7 @@ const category = {
 database.insert('categories', category).then();
 
 database.showAll('categories').then((th) => console.log(th));*/
-
+database.showAll('users').then((u)=>console.log(u));
 
 const port = process.env.PORT || 3000;
 
