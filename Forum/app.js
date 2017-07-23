@@ -29,7 +29,7 @@ const database = new Database(connectionstring);
 // sport, other, cars, space, men, women, clothing, movies, sex, music, programming, animals, school, work
 /*const category1 = {
     title: 'Games',
-    bio: 'A game is a structured form of play, usually undertaken for enjoyment and sometimes used as an educational tool.[1] Games are distinct from work, which is usually carried out for remuneration, and from art, which is more often an expression of aesthetic or ideological elements. However, the distinction is not clear-cut, and many games are also considered to be work (such as professional players of spectator sports or games) or art (such as jigsaw puzzles or games involving an artistic layout such as Mahjong, solitaire, or some video games).',
+    bio: '',
     posts: [],
 };
 database.insert('categories', category1).then((c) => console.log(c));*/

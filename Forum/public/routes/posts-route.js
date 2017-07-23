@@ -100,6 +100,18 @@ const attach = (app, db) => {
                             .then(() => db.insert('users', changingUser));
                     });
                 });
+        })
+        .get('/:category/:title', (req, res) => {
+            const user = req.user;
+            const category = req.params.category;
+            const title = req.params.title;
+            db.find('posts/' + category, {title: title}).then((posts)=>{
+                if(posts.length!==1) {
+                    res.render('404');
+                } else {
+                    res.render('post',{user, category, post: posts[0]});
+                }                    
+            });
         });
 
     app.use('/posts', router);

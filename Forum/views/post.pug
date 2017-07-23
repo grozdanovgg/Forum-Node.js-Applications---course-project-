@@ -1,0 +1,20 @@
+extends shared/_master
+
+block body
+    // Page Content
+    .container
+        // Page Heading
+        h1.my-4=post.title
+            //small Secondary Text
+        p=post.post
+        p='Author: '+post.author
+        each comment in post.comments
+            // Project One
+            .row
+                .col-md-5
+                    a(href="/users/"+comment.author)
+                        h3=comment.author
+                    p=comment.text
+                    p=comment.date
+            // /.row
+            hr
