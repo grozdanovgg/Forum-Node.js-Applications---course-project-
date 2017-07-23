@@ -6,10 +6,8 @@ const attach = (app, db) => {
     router
         .get('/', (req, res) => {
             const user = req.user;
-            console.log('---current user---');
-            console.log(user);
-            //const page = pageHandler
-            //    .choosePage(req.query.page);
+            const page = pageHandler
+                .choosePage(req.query.page);
             db.showAll('categories')
                 .then((categories) => {
                     const size = 8;

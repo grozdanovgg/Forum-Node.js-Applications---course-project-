@@ -13,7 +13,9 @@ block body
                 .col-md-5
                     a(href='/Posts/'+category.title)
                         h3=category.title
-                        img(src="/static/images/categories/"+category.title+".jpg")
+                        .wrapper
+                            span.square.individual
+                                img.ninth.before.after(src="/static/images/categories/"+category.title+".jpg", height="200", width="400")
             // /.row
             hr
         
@@ -21,7 +23,7 @@ block body
         ul.pagination.justify-content-center
             li.page-item
                 a.page-link(href='?page=1', aria-label='Previous')
-                    span(aria-hidden='true')
+                    span(aria-hidden='true') «
                     span.sr-only Previous
             each pageN in navigationNumbers
                 li.page-item

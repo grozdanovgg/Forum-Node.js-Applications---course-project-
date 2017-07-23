@@ -240,5 +240,10 @@ body {
     background: #eee;
 }
 
+.my-border {
+    background-color: #292B2C;
+    border: 5px solid #d73444;
+}
+
 
 /* Messages END*/
