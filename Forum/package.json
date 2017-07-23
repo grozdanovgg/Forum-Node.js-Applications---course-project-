@@ -18,7 +18,8 @@
         "passport-local": "^1.0.0",
         "pug": "^2.0.0-rc.2",
         "socket.io": "^2.0.3",
-        "tether": "^1.4.0"
+        "tether": "^1.4.0",
+        "toastr": "^2.1.2"
     },
     "devDependencies": {
         "bootstrap": "4.0.0-alpha.6"

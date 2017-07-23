@@ -26,8 +26,8 @@ app.use('/libs', express.static(path.join(__dirname, './node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
 const database = new Database(connectionstring);
 
-// sport, other, cars, space, men, women, clothing, movies, sex, music, programming, animals, school, work
-/*const category1 = {
+//  sport, other, cars, space, men, women, clothing, movies, sex, music, programming, animals, school, work
+/* const category1 = {
     title: 'Games',
     bio: '',
     posts: [],
@@ -66,10 +66,13 @@ const server = app.listen(port, () =>
     console.log('Magic is running at' + port + '/')
 );
 
+
 const io = require('socket.io').listen(server);
 
 io.on('connection', function(socket) {
-    socket.on('chat message', function(msg) {
-        io.emit('chat message', msg);
+    // Server side receiving the message then emmiting 
+    // it again for each client to handle
+    socket.on('chat message', (msgData) => {
+        io.emit('chat message', msgData);
     });
 });

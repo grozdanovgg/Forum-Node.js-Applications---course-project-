@@ -1,32 +1,19 @@
-$.getScript("/static/js/socket.io.js", function(func) {
-    var socket = io();
+/* globals $, io  */
+
+const user = $('.navbar-nav').children().children()[0].innerText;
+
+$.getScript('/static/js/socket.io.js', () => {
+    const socket = io();
+    // Client side emit data to server to catch - continue in app.js to handle.
     $('.chat').submit(function() {
-        socket.emit('chat message', $('#m').val());
+        socket.emit('chat message', { user: user, message: $('#m').val() });
         $('#m').val('');
         return false;
     });
-    socket.on('chat message', function(msg) {
-        $('#messages').append($('<li>').text(msg)).scrollTop($("#messages")[0].scrollHeight);
+    // Handle emmitted data from server with the same event name
+    socket.on('chat message', (msgData) => {
+        $('#messages')
+            .append($('<li>').text(`${msgData.user}: ${msgData.message}`))
+            .scrollTop($('#messages')[0].scrollHeight);
     });
-    // alert("Script loaded but not necessarily executed.");
-
 });
-
-// function messenger() {
-//     // io();
-//     // console.log(socket);
-//     console.log('Hey hey');
-// }
-
-
-// $(function() {
-//     var socket = io();
-//     $('.chat').submit(function() {
-//         socket.emit('chat message', $('#m').val());
-//         $('#m').val('');
-//         return false;
-//     });
-//     socket.on('chat message', function(msg) {
-//         $('#messages').append($('<li>').text(msg)).scrollTop($("#messages")[0].scrollHeight);
-//     });
-// });

@@ -10,6 +10,7 @@ html(lang='en')
 		link(rel='stylesheet', href='/static/css/bootstrap.min.css')
 		link(rel="stylesheet", href="/static/css/style.css")
 		link(rel='icon', href='/static/images/icon.png')
+		link(rel="stylesheet", href="/static/css/toastr.css" )
 		// Custom styles for this template
 		// Temporary navbar container fix
 		style.
@@ -63,30 +64,8 @@ html(lang='en')
 	footer.py-5.bg-inverse
 		.container
 			p.m-0.text-center.text-white Copyright © Tell Us 2017
-	//- 	.container.chat-container
-	//- 		// Websocket Chat:
-	//- 		ul#messages
-	//- 		<form class="chat" action="">
-	//- 			<input id="m" autocomplete="off" /><button>Send</button>
-	//- 		</form>
-	//- //Web Socket script 
-	//- script(src='/static/js/messenger.js')
-	//- script(src='/socket.io/socket.io.js')
-	//- script.
-	//- 	messenger();
-	//- script.
-	//- 	$(function () {
-	//- 	var socket = io();
-	//- 	$('.chat').submit(function(){
-	//- 	socket.emit('chat message', $('#m').val());
-	//- 	$('#m').val('');
-	//- 	return false;
-	//- 	});
-	//- 	socket.on('chat message', function(msg){
-	//- 	$('#messages').append($('<li>').text(msg)).scrollTop($("#messages")[0].scrollHeight);;
-	//- 	});
-	//- 	});
-
+	// Toastr js
+	script(src="/static/js/toastr.js")
 	// Bootstrap core JavaScript
 	script(src='/static/js/jquery.min.js')
 	script(src='/static/js/tether.min.js')
