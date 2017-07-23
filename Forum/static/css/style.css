@@ -8,6 +8,10 @@ body {
     padding-top: 54px;
 }
 
+footer {
+    height: 200px;
+}
+
 @media (min-width: 992px) {
     body {
         padding-top: 56px;
@@ -226,10 +230,37 @@ body {
 
 /* Messages START*/
 
+.chat {
+    background: #000;
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+}
+
+form input {
+    border: 0;
+    padding: 10px;
+    width: 90%;
+    margin-right: .5%;
+}
+
+form button {
+    width: 9%;
+    background: rgb(130, 224, 255);
+    border: none;
+    padding: 10px;
+}
+
 #messages {
+    position: fixed;
+    max-height: 150px;
+    width: 80%;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 30px;
+    bottom: 30px;
+    overflow: auto;
 }
 
 #messages li {
@@ -238,6 +269,10 @@ body {
 
 #messages li:nth-child(odd) {
     background: #eee;
+}
+
+#messages li:nth-child(even) {
+    background: #E0E0E0;
 }
 
 .my-border {

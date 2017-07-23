@@ -32,4 +32,13 @@ block body
                 a.page-link(href='?page='+(pagesNum), aria-label='Next')
                     span(aria-hidden='true') »
                     span.sr-only Next
-    // /.container
+    br
+    .container.chat-container
+        // Websocket Chat:
+        ul#messages
+        <form class="chat" action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+    //Web Socket script 
+    script(src='https://code.jquery.com/jquery-1.11.1.js')
+    script(src='/static/js/messenger.js')
