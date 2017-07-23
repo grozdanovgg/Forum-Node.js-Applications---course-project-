@@ -95,9 +95,11 @@ const attach = (app, db) => {
                     });
                     db.find('users', { username: user.username }).then((users) => {
                         const changingUser = users[0];
+                        console.log(changingUser);
                         changingUser.posts.push(newPost);
-                        db.delete('users', { username: user.username })
-                            .then(() => db.insert('users', changingUser));
+                        db.update('users',{ username: user.username }, changingUser).then((u)=>console.log(u));
+                        //db.delete('users', { username: user.username })
+                        //    .then(() => db.insert('users', changingUser));
                     });
                 });
         })
@@ -113,6 +115,18 @@ const attach = (app, db) => {
                     res.render('post',{user, category, post: posts[0]});
                 }                    
             });
+        })
+        .post('/:category/:id', (req, res) => {
+            const user = req.user;
+            const category = req.params.category;
+            const date = new Date();
+            const text = req.body.text;
+            const newComment = {
+                category,
+                author: user.username,
+                category: category,
+                date,
+            };
         });
 
     app.use('/posts', router);

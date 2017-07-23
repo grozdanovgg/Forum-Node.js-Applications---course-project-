@@ -24,7 +24,9 @@ const database = class Database {
             MongoClient.connect(this.connectionString)
                 .then((db) => {
                     const updateCollection = db.collection(collection);
-                    updateCollection.update(filter, record);
+                    updateCollection.update(filter, record, function(err, res) {
+                        db.close();
+                    });
                     resolve(updateCollection
                         .find()
                         .toArray());
