@@ -52,9 +52,11 @@ const category = {
     title: 'Other',
     posts: [],
 };
-database.insert('categories', category).then();
+database.insert('categories', category).then();*/
 
-database.showAll('categories').then((th) => console.log(th));*/
+//database.showAll('categories').then((th) => console.log(th));
+
+//database.findById('categories','59743f13e392ab1c148c64b0').then((f)=>console.log(f));
 
 
 const port = process.env.PORT || 3000;

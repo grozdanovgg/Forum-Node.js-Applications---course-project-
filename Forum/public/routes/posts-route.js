@@ -106,6 +106,7 @@ const attach = (app, db) => {
             const category = req.params.category;
             const title = req.params.title;
             db.find('posts/' + category, {title: title}).then((posts)=>{
+                console.log(posts);
                 if(posts.length!==1) {
                     res.render('404');
                 } else {
