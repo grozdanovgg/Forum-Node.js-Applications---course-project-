@@ -101,11 +101,11 @@ const attach = (app, db) => {
                     });
                 });
         })
-        .get('/:category/:title', (req, res) => {
+        .get('/:category/:id', (req, res) => {
             const user = req.user;
             const category = req.params.category;
-            const title = req.params.title;
-            db.find('posts/' + category, {title: title}).then((posts)=>{
+            const id = req.params.id;
+            db.findById('posts/' + category, id).then((posts)=>{
                 console.log(posts);
                 if(posts.length!==1) {
                     res.render('404');
