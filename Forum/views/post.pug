@@ -8,13 +8,30 @@ block body
             //small Secondary Text
         p=post.post
         p='Author: '+post.author
+        if user
+            .row
+                .col-md-5
+                    form.form-horizontal(action='', method='POST')
+                        .control-group
+                            // Title
+                            label.control-label(for='text') Comment
+                            .controls
+                                input#title.input-xlarge(type='text', name='text', placeholder='', value=text)
+                        .control-group
+                            // Button
+                            .controls
+                                button.btn.btn-success(type='submit', value='submit') Add Comment
+                br
+            // /.row
+            hr
+        
         each comment in post.comments
             // Project One
             .row
                 .col-md-5
                     a(href="/users/"+comment.author)
                         h3=comment.author
-                    p=comment.text
+                    h4=comment.text
                     p=comment.date
             // /.row
             hr
