@@ -65,8 +65,8 @@ html(lang='en')
 			p.m-0.text-center.text-white Copyright © Tell Us 2017
 		.container
 			// Websocket Chat:
-			<ul id="messages"></ul>
-			<form action="">
+			ul#messages
+			<form class="chat" action="">
 				<input id="m" autocomplete="off" /><button>Send</button>
 			</form>
 	//Web Socket script 
@@ -75,7 +75,7 @@ html(lang='en')
 	script.
 		$(function () {
 		var socket = io();
-		$('form').submit(function(){
+		$('.form').submit(function(){
 		socket.emit('chat message', $('#m').val());
 		$('#m').val('');
 		return false;
