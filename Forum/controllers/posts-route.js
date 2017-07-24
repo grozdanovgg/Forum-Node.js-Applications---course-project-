@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const pageHandler = require('../paging/paging');
+const pageHandler = require('../models/paging');
 
 const attach = (app, db) => {
     const router = new Router();
@@ -31,6 +31,7 @@ const attach = (app, db) => {
         .get('/:category', (req, res) => {
             const user = req.user;
             const category = req.params.category;
+            // console.log(category);
 
             const page = pageHandler
                 .choosePage(req.query.page);
@@ -97,7 +98,7 @@ const attach = (app, db) => {
                         const changingUser = users[0];
                         console.log(changingUser);
                         changingUser.posts.push(newPost);
-                        db.update('users',{ username: user.username }, changingUser);
+                        db.update('users', { username: user.username }, changingUser);
                         //db.delete('users', { username: user.username })
                         //    .then(() => db.insert('users', changingUser));
                     });
@@ -107,13 +108,13 @@ const attach = (app, db) => {
             const user = req.user;
             const category = req.params.category;
             const id = req.params.id;
-            db.findById('posts/' + category, id).then((posts)=>{
+            db.findById('posts/' + category, id).then((posts) => {
                 console.log(posts);
-                if(posts.length!==1) {
+                if (posts.length !== 1) {
                     res.render('404');
                 } else {
-                    res.render('post',{user, category, post: posts[0]});
-                }                    
+                    res.render('post', { user, category, post: posts[0] });
+                }
             });
         })
         .post('/:category/:id', (req, res) => {
@@ -129,12 +130,12 @@ const attach = (app, db) => {
                 text,
                 date,
             };
-            db.findById('posts/' + category, id).then((posts)=> {
+            db.findById('posts/' + category, id).then((posts) => {
                 const newPost = posts[0];
                 newPost.comments.push(newComment);
                 console.log(newComment);
-                db.update('posts/' + category, {title: newPost.title}, newPost).then((p)=>{
-                    res.render('post',{user, category, post: newPost});
+                db.update('posts/' + category, { title: newPost.title }, newPost).then((p) => {
+                    res.render('post', { user, category, post: newPost });
                 });
             });
         });

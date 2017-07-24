@@ -1,10 +1,10 @@
 /* globals __dirname, process  */
 /* eslint no-process-env: off*/
 const express = require('express');
-const appRouth = require('./public/routes/app-route');
-const posts = require('./public/routes/posts-route');
-const users = require('./public/routes/users-route');
-const auth = require('./public/routes/auth-route');
+const appRouth = require('./controllers/app-route');
+const posts = require('./controllers/posts-route');
+const users = require('./controllers/users-route');
+const auth = require('./controllers/auth-route');
 const path = require('path');
 const bodyParser = require('body-parser');
 const authConfig = require('./config/auth.config');
@@ -20,9 +20,11 @@ const app = express();
 // const connectionstring = 'mongodb://admin:adminadmin@10.0.22.131:27017/MongoDB-MongoDBStack-1GJGQ73ACA1kWM';
 const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
 // const connectionstring = 'mongodb://localhost/items-db';
+app.use(express.static(__dirname + '../Forum'));
+app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 app.use('/static', express.static(path.join(__dirname, './static')));
-app.use('/libs', express.static(path.join(__dirname, './node_modules')));
+app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
 const database = new Database(connectionstring);
 

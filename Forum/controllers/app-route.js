@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const pageHandler = require('../paging/paging');
+const pageHandler = require('../models/paging');
 
 const attach = (app, db) => {
     const router = new Router();
