@@ -4,9 +4,9 @@ const { Router } = require('express');
 const attach = (app, database) => {
     const router = new Router();
     router
-        .get('/:email', (req, res) => {
+        .get('/:username', (req, res) => {
             const user = req.user;
-            if (user.email === req.params.email) {
+            if (user.username === req.params.username) {
                 res.render('myProfile', { user });
             } else {
                 res.render('otherProfile');
