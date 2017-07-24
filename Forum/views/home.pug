@@ -2,10 +2,11 @@ extends shared/_master
 
 block body
     // Page Content
-    .container
+    .container.categories
         // Page Heading
-        h1.my-4
-            | Categories
+        div.categories-title
+            h1.my-4
+                |Categories
             .row
                 .col-md-6.portfolio-item
                     a(href='/Posts/Animals')
