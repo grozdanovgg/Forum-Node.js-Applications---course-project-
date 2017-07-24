@@ -37,9 +37,9 @@ html(lang='en')
 							li.nav-item.naveffect
 								a.nav-link(href='/users/'+user.username)
 									span.blue(data-hover=user.username)=user.username
-							li.nav-item.naveffect
-								a.nav-link(href='/users/settings')
-									span.blue(data-hover='Settings') Settings
+							//- li.nav-item.naveffect
+							//- 	a.nav-link(href='/users/settings')
+							//- 		span.blue(data-hover='Settings') Settings
 						else
 							li.nav-item.naveffect
 								a.nav-link(href='/auth/login')
@@ -48,7 +48,7 @@ html(lang='en')
 								a.nav-link(href='/auth/register')
 									span(data-hover='Register') Register
 						li.nav-item.naveffect
-							a.nav-link(href='#')
+							a.nav-link(href='/about/')
 								span(data-hover='About') About
 						li.nav-item.naveffect
 							a.nav-link(href='#')

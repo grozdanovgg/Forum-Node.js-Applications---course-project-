@@ -5,6 +5,7 @@ const appRouth = require('./controllers/app-route');
 const posts = require('./controllers/posts-route');
 const users = require('./controllers/users-route');
 const auth = require('./controllers/auth-route');
+const about = require('./controllers/about-route');
 const path = require('path');
 const bodyParser = require('body-parser');
 const authConfig = require('./config/auth.config');
@@ -28,7 +29,7 @@ app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
 const database = new Database(connectionstring);
 
-//  sport, other, cars, space, men, women, clothing, movies, sex, music, programming, animals, school, work
+// sport, other, cars, space, men, women, clothing, movies, sex, music, programming, animals, school, work
 /* const category1 = {
     title: 'Games',
     bio: '',
@@ -41,6 +42,7 @@ appRouth(app, database);
 posts(app, database);
 users(app, database);
 auth(app, database);
+about(app);
 
 // database.showAll('users').then(u => console.log(u));
 // database.deleteAll('posts/Sport');

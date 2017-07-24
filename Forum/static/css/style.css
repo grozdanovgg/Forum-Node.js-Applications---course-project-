@@ -4,6 +4,32 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-1-col-portfolio/blob/master/LICENSE)
  */
 
+
+/* About CSS START */
+
+header.masthead {
+    background: url('/static/images/backgrounds/about-us.jpg') no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+header.masthead>.overlay {
+    padding: 5rem 0;
+    text-align: center;
+    /* background: rgba(0, 0, 0, 0.6); */
+}
+
+@media (min-width: 992px) {
+    header.masthead>.overlay {
+        padding: 10rem 0;
+    }
+}
+
+
+/* About CSS END */
+
 .portfolio-item {
     padding: 15px;
 }
