@@ -1,0 +1,24 @@
+extends shared/_master
+
+block body
+    .container
+        h1.my-4=user.username
+        
+        //small Secondary Text
+        h3='User: ' + user.username
+        // To be implemented correctly - with real picture:
+        //h3='Profile picture: ' + user.pic
+        if isMine
+            button.btn.btn-success Settings
+        each post in posts
+            h3=Posts
+            // Project One
+            .row
+                .col-md-5
+                    h3=post.title
+                    p=post.author
+                    a.btn.btn-primary(href='/users/'+user.username+'/'+post._id) View Post
+            // /.row
+            hr
+        // /.row
+        hr

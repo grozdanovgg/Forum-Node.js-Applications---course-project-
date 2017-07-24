@@ -17,9 +17,7 @@ const attach = (app, db) => {
                     const showcategories = pagingResult.filteredCollection;
                     const navigationNumbers = pagingResult.navigationNumbers;
                     const pagesNum = pagingResult.numberOfPages;
-                    const i = 0;
                     res.render('home', {
-                        i,
                         showcategories,
                         page,
                         navigationNumbers,
