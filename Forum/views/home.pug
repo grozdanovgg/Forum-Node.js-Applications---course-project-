@@ -7,67 +7,23 @@ block body
         div.categories-title
             h1.my-4
                 |Categories
+        - for (var i = 0; i < showcategories.length; ++i) {
             .row
                 .col-md-6.portfolio-item
-                    a(href='/Posts/Animals')
-                        h3
-                            |Animals
-                        .wrapper
+                    a(href='/Posts/'+showcategories[i].title)
+                        h3=showcategories[i].title
+                            .wrapper
                             span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/Animals.jpg", height="200", width="400")
-                .col-md-6.portfolio-item
-                    a(href='/Posts/Cars')
-                        h3 
-                            |Cars
-                        .wrapper
-                            span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/Cars.jpg", height="200", width="400")
-            .row
-                .col-md-6.portfolio-item
-                    a(href='/Posts/Clothing')
-                        h3 
-                            |Clothing
-                        .wrapper
-                            span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/Clothing.jpg", height="200", width="400")
-                .col-md-6.portfolio-item
-                    a(href='/Posts/Man')
-                        h3 
-                            |Man
-                        .wrapper
-                            span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/Man.jpg", height="200", width="400")
-            .row
-                .col-md-6.portfolio-item
-                    a(href='/Posts/School')
-                        h3 
-                            |School
-                        .wrapper
-                            span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/School.jpg", height="200", width="400")
-                .col-md-6.portfolio-item
-                    a(href='/Posts/Space')
-                        h3 
-                            |Space
-                        .wrapper
-                            span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/Space.jpg", height="200", width="400")
-            .row
-                .col-md-6.portfolio-item
-                    a(href='/Posts/Sport')
-                        h3 
-                            |Sport
-                        .wrapper
-                            span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/Sport.jpg", height="200", width="400")
-                .col-md-6.portfolio-item
-                    a(href='/Posts/Women')
-                        h3 
-                            |Women
-                        .wrapper
-                            span.square.individual
-                                img.ninth.before.after.img-responsive(src="/static/images/categories/Women.jpg", height="200", width="400")
-            hr
+                                img.ninth.before.after(src="/static/images/categories/"+showcategories[i].title+".jpg", height="200", width="400")
+                -i++
+                if i<showcategories.length
+                    .col-md-6.portfolio-item
+                        a(href='/Posts/'+showcategories[i].title)
+                            h3=showcategories[i].title
+                                .wrapper
+                                span.square.individual
+                                    img.ninth.before.after(src="/static/images/categories/"+showcategories[i].title+".jpg", height="200", width="400")
+        - }
         
         // Pagination
         ul.pagination.justify-content-center
