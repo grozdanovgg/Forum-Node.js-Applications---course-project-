@@ -4,6 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-1-col-portfolio/blob/master/LICENSE)
  */
 
+.img-responsive {
+    height: 150px;
+    object-fit: cover;
+}
+
 body {
     padding-top: 54px;
 }
