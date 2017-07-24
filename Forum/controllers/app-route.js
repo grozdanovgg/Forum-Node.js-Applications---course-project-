@@ -4,10 +4,11 @@ const pageHandler = require('../models/paging');
 const attach = (app, db) => {
     const router = new Router();
     router
-        .get('/', (req, res) => {
+        .get('/home', (req, res) => {
             const user = req.user;
             const page = pageHandler
                 .choosePage(req.query.page);
+
             db.showAll('categories')
                 .then((categories) => {
                     const size = 8;

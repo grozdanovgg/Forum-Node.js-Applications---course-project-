@@ -6,6 +6,7 @@ const posts = require('./controllers/posts-route');
 const users = require('./controllers/users-route');
 const auth = require('./controllers/auth-route');
 const about = require('./controllers/about-route');
+const start = require('./controllers/start-route');
 const path = require('path');
 const bodyParser = require('body-parser');
 const authConfig = require('./config/auth.config');
@@ -43,6 +44,7 @@ posts(app, database);
 users(app, database);
 auth(app, database);
 about(app);
+start(app, database);
 
 // database.showAll('users').then(u => console.log(u));
 // database.deleteAll('posts/Sport');
