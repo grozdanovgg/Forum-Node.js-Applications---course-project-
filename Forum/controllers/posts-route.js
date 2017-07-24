@@ -142,6 +142,8 @@ const attach = (app, db) => {
                         const foundUser = users[0];
                         const post = foundUser.posts.find((f)=>f.title===newPost.title);
                         post.comments.push(newComment);
+                        const index = foundUser.posts.indexOf(post.title);
+                        foundUser.posts.splice(index, 1);
                         foundUser.posts.push(post);
                         db.update('users', { username: user.username }, foundUser);
                     });

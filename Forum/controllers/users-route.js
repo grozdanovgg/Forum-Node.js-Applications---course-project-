@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const ObjectID = require('mongodb').ObjectID;
 // const pageHandler = require('../paging/paging');
 
 const attach = (app, database) => {
@@ -33,12 +34,14 @@ const attach = (app, database) => {
                 text,
                 date,
             };
-            database.find('users', {username}).then((users) => {
+            database.find('users', {username: username}).then((users) => {
                 const foundUser = users[0];
                 const post = foundUser.posts.find((f)=>f._id.toString()===id);
                 post.comments.push(newComment);
+                const index = foundUser.posts.indexOf(post.title);
+                foundUser.posts.splice(index, 1);
                 foundUser.posts.push(post);
-                database.update('users', { username }, foundUser).then((p) => {
+                database.update('users', { username: foundUser.username }, foundUser).then((p) => {
                     res.render('post', { user, category: post.category, post });
                     database.find('posts/' + post.category, {title: post.title}).then((posts) => {
                         const newPost = posts[0];
