@@ -86,6 +86,11 @@ const attach = (app, db) => {
                     const showPages = pagingResult.navigationNumbers;
 
                     const pagesNum = pagingResult.numberOfPages;
+
+                    const id = posts[posts.length - 1]._id;
+                    
+                    newPost[id] = id;
+
                     res.render('showposts', {
                         category,
                         showposts,
@@ -124,18 +129,22 @@ const attach = (app, db) => {
             const date = new Date();
             const text = req.body.text;
             const newComment = {
-                category,
                 author: user.username,
-                category: category,
                 text,
                 date,
             };
             db.findById('posts/' + category, id).then((posts) => {
                 const newPost = posts[0];
                 newPost.comments.push(newComment);
-                console.log(newComment);
                 db.update('posts/' + category, { title: newPost.title }, newPost).then((p) => {
                     res.render('post', { user, category, post: newPost });
+                    db.find('users', {username: user.username}).then((users) => {
+                        const foundUser = users[0];
+                        const post = foundUser.posts.find((f)=>f.title===newPost.title);
+                        post.comments.push(newComment);
+                        foundUser.posts.push(post);
+                        db.update('users', { username: user.username }, foundUser);
+                    });
                 });
             });
         });
