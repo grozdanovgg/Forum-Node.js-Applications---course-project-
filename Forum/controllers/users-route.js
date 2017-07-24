@@ -7,11 +7,17 @@ const attach = (app, database) => {
     router
         .get('/:username', (req, res) => {
             const user = req.user;
-            if (user.username === req.params.username) {
-                res.render('myProfile', { user });
-            } else {
-                res.render('otherProfile');
-            }
+            const username = req.params.username;
+            database.find('users', {username: username}).then((users)=>{
+                const foundUser = users[0];
+                const posts = foundUser.posts;
+                posts.reverse();
+                if (user.username === req.params.username) {
+                    res.render('myProfile', { user, posts });
+                } else {
+                    res.render('otherProfile');
+                }
+            });
         })
         .get('/:username/:id', (req, res) => {
             const user = req.user;

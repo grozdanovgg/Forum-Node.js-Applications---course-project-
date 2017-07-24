@@ -38,6 +38,7 @@ const attach = (app, db) => {
 
             db.showAll('posts/' + category)
                 .then((posts) => {
+                    posts.reverse();
                     const size = 5;
                     const pagingResult = pageHandler
                         .handle(posts, page, size, res);
@@ -77,6 +78,7 @@ const attach = (app, db) => {
             };
             db.insert('posts/' + category, newPost)
                 .then((posts) => {
+                    posts.reverse();
                     const size = 5;
                     const pagingResult = pageHandler
                         .handle(posts, page, size, res);
