@@ -12,10 +12,10 @@ const attach = (app, database) => {
                 const foundUser = users[0];
                 const posts = foundUser.posts;
                 posts.reverse();
-                if (user.username === req.params.username) {
-                    res.render('myProfile', { user, posts });
+                if (user&&user.username === username) {
+                    res.render('profile', { user: foundUser, posts, isMine: true });
                 } else {
-                    res.render('otherProfile');
+                    res.render('profile', { user: foundUser, posts, isMine: false });
                 }
             });
         })

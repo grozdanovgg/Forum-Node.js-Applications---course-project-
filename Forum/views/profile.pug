@@ -5,20 +5,15 @@ block body
         h1.my-4=user.username
         
         //small Secondary Text
-        h3='E-mail: ' + user.username
+        h3='User: ' + user.username
         // To be implemented correctly - with real picture:
-        h3='Profile picture: ' + user.pic
-        button.btn.btn-success Settings
-        .row
-            .col-md-5
-                h3='Posts: '
-                a.btn.btn-primary(href='/Posts/') View Posts
+        //h3='Profile picture: ' + user.pic
+        if isMine
+            button.btn.btn-success Settings
         each post in posts
+            h3=Posts
             // Project One
             .row
-                .col-md-7
-                    a(href='#')
-                        img.img-fluid.rounded.mb-3.mb-md-0(src='http://placehold.it/700x300', alt='')
                 .col-md-5
                     h3=post.title
                     p=post.author
