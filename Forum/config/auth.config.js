@@ -97,11 +97,11 @@ const configAuth = (app, database) => {
     app.use(passport.session());
 
     passport.serializeUser((user, done) => {
-        done(null, user.email);
+        done(null, user._id);
     });
 
-    passport.deserializeUser((email, done) => {
-        database.find('users', { email: email })
+    passport.deserializeUser((id, done) => {
+        database.findById('users', id)
             .then((users) => {
                 if (users.length < 1) {
                     return done('No such user found.----');
@@ -109,8 +109,7 @@ const configAuth = (app, database) => {
                     return done('There is more than one user with this id');
                 }
                 return done(null, users[0]);
-            })
-            .catch(() => done('Problem with id'));
+            });
     });
 };
 

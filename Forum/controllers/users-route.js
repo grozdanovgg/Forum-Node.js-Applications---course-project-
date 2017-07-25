@@ -49,6 +49,7 @@ const attach = (app, database) => {
             const text = req.body.text;
             const newComment = {
                 author: user.username,
+                img: user.pictureName,
                 text,
                 date,
             };

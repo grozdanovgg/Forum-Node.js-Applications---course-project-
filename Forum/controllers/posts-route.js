@@ -74,10 +74,12 @@ const attach = (app, db) => {
             const post = req.body.post;
             const page = pageHandler
                 .choosePage(req.query.page);
+            console.log(user.pictureName);
             const newPost = {
                 title: title,
                 post: post,
                 author: user.username,
+                img: user.pictureName,
                 category: category,
                 comments: [],
             };
@@ -140,6 +142,7 @@ const attach = (app, db) => {
             const text = req.body.text;
             const newComment = {
                 author: user.username,
+                img: user.pictureName,
                 text,
                 date,
             };

@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const passport = require('passport');
+var multer  = require('multer')
+const upload = multer({dest: 'Forum/static/images/profile/'});
 
 const attach = (app, db) => {
     const router = new Router();
@@ -23,13 +25,36 @@ const attach = (app, db) => {
             }
         })
         .post('/register', passport.authenticate('local', {
-            successRedirect: '/',
+            successRedirect: '/auth/profilePicture',
             failureRedirect: '/auth/register',
             failureFlash: true,
         }))
         .get('/logout', (req, res) => {
             req.logout();
             res.redirect('/');
+        })
+        .get('/profilePicture', (req, res) => {
+            const user = req.user;
+            if(user) {
+                res.render('picture', {user});
+            } else {
+                const message = 'You should be register, to upload picture.';
+                res.render('404', { user, message });
+            }
+        })
+        .post('/profilePicture', upload.any(), (req, res) => {
+            const user = req.user;
+            if(req.files) {
+                res.send(req.files[0].filename);
+                db.find('users', {username: user.username})
+                    .then((users) => {
+                        var changingUser = users[0];
+                        changingUser.pictureName = req.files[0].filename;
+                        db.update('users', {username: user.username}, changingUser);
+                    });
+            } else {
+                res.redirect('/hey');
+            }
         });
 
     app.use('/auth', router);

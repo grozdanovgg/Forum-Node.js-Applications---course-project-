@@ -32,8 +32,11 @@ block body
             // Project One
             .row
                 .col-md-7
-                    a(href='#')
-                        img.img-fluid.rounded.mb-3.mb-md-0(src='http://placehold.it/700x300', alt='')
+                    a(href='/users/'+post.author)
+                        if post.img
+                            img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/${post.img}`, alt='')
+                        else
+                            img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/default.jpg`, alt='', height="120" width="100")
                 .col-md-5
                     h3=post.title
                     p=post.author
