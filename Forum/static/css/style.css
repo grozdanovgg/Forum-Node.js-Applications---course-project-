@@ -96,7 +96,7 @@ footer {
 }
 
 .ninth:hover {
-    color: #d73444;
+    color: #F05F40;
 }
 
 .ninth.before:before,
@@ -121,7 +121,7 @@ footer {
     height: 5px;
     height: 0.35rem;
     width: 0;
-    background: #d73444;
+    background: #F05F40;
 }
 
 .square {
@@ -149,7 +149,7 @@ footer {
     width: 5px;
     width: 0.35rem;
     height: 0;
-    background: #d73444;
+    background: #F05F40;
 }
 
 .square:before {
@@ -238,7 +238,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #d73444;
+    background: #F05F40;
     color: white;
     content: attr(data-hover);
     -webkit-transform: rotateX(270deg);

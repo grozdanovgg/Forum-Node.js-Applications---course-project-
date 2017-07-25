@@ -59,14 +59,10 @@ html(lang='en')
 						li.nav-item.naveffect
 							a.nav-link(href='/about/')
 								span(data-hover='About') About
-						li.nav-item.naveffect
-							a.nav-link(href='#')
-								span(data-hover='Services') Services
-						li.nav-item.naveffect
-							a.nav-link(href='#')
-								span(data-hover='Contact') Contact
-		
-								
+						if user
+							li.nav-item.naveffect
+								a.nav-link(href='#')
+									span(data-hover='Logout') Logout					
 	block body
 
 	// Footer
