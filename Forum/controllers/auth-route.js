@@ -26,7 +26,11 @@ const attach = (app, db) => {
             successRedirect: '/',
             failureRedirect: '/auth/register',
             failureFlash: true,
-        }));
+        }))
+        .get('/logout', (req, res) => {
+            req.logout();
+            res.redirect('/');
+        });
 
     app.use('/auth', router);
 };
