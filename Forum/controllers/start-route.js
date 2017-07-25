@@ -7,15 +7,14 @@ const attach = (app, db) => {
             const user = req.user;
             db.showAll('categories')
                 .then((categories) => {
-                    // console.log(categories);
-                    // console.log(user);
                     res.render('start', {
                         categories,
                         user,
                     });
                 })
                 .catch((error) => {
-                    res.render('404');
+                    const message = 'There is a problem with the connection.';
+                    res.render('404', { user, message });
                 });
         });
     app.use('/', router);

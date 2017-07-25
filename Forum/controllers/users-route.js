@@ -10,6 +10,10 @@ const attach = (app, database) => {
             const username = req.params.username;
             database.find('users', {username: username}).then((users)=>{
                 const foundUser = users[0];
+                if(!foundUser) {
+                    const message = 'There was a problem finding the user.';
+                    res.render('404', { user, message });
+                }
                 const posts = foundUser.posts;
                 posts.reverse();
                 if (user&&user.username === username) {
@@ -17,6 +21,10 @@ const attach = (app, database) => {
                 } else {
                     res.render('profile', { user: foundUser, posts, isMine: false });
                 }
+            })
+            .catch(() => {
+                const message = 'There was a problem finding the user.';
+                res.render('404', { user, message });
             });
         })
         .get('/:username/:id', (req, res) => {
@@ -27,6 +35,10 @@ const attach = (app, database) => {
                 const foundUser = u[0];
                 const post = foundUser.posts.find((f)=>f._id.toString()===id);
                 res.render('post', {user, category: post.category, post});
+            })
+            .catch(() => {
+                const message = 'There was a problem finding the post.';
+                res.render('404', { user, message });
             });
         })
         .post('/:username/:id', (req, res) => {
@@ -55,6 +67,10 @@ const attach = (app, database) => {
                         database.update('posts/' + post.category, {title: post.title}, newPost);
                     });
                 });
+            })
+            .catch(() => {
+                const message = 'There was a problem finding the user.';
+                res.render('404', { user, message });
             });
         });
 

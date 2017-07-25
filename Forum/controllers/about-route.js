@@ -4,11 +4,11 @@ const { Router } = require('express');
 const attach = (app) => {
     const router = new Router();
     router
-        .get('/about', (req, res) => {
+        .get('/', (req, res) => {
             const user = req.user;
             res.render('about', { user });
         });
 
-    app.use('/', router);
+    app.use('/about', router);
 };
 module.exports = attach;

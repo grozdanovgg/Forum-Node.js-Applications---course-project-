@@ -26,6 +26,10 @@ const attach = (app, db) => {
                         pagesNum,
                         user,
                     });
+                })
+                .catch(() => {
+                    const message = 'There was a problem finding the user.';
+                    res.render('404', { user, message });
                 });
         })
         .get('/:category', (req, res) => {
@@ -59,8 +63,9 @@ const attach = (app, db) => {
                     });
                 })
                 .catch(() => {
-                    res.render('404');
-                });
+                    const message = 'There was a problem finding the posts.';
+                    res.render('404', { user, message });
+                });;
         })
         .post('/:category', (req, res) => {
             const user = req.user;
@@ -106,9 +111,11 @@ const attach = (app, db) => {
                         console.log(changingUser);
                         changingUser.posts.push(newPost);
                         db.update('users', { username: user.username }, changingUser);
-                        //db.delete('users', { username: user.username })
-                        //    .then(() => db.insert('users', changingUser));
                     });
+                })
+                .catch(() => {
+                    const message = 'There was a problem inserting the post.';
+                    res.render('404', { user, message });
                 });
         })
         .get('/:category/:id', (req, res) => {
@@ -118,7 +125,8 @@ const attach = (app, db) => {
             db.findById('posts/' + category, id).then((posts) => {
                 // console.log(posts);
                 if (posts.length !== 1) {
-                    res.render('404');
+                    const message = 'There was a problem finding the post.';
+                    res.render('404', { user, message });
                 } else {
                     res.render('post', { user, category, post: posts[0] });
                 }
@@ -150,6 +158,10 @@ const attach = (app, db) => {
                         db.update('users', { username: user.username }, foundUser);
                     });
                 });
+            })
+            .catch(() => {
+                const message = 'There was a problem finding the post.';
+                res.render('404', { user, message });
             });
         });
 

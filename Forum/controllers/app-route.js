@@ -4,7 +4,7 @@ const pageHandler = require('../models/paging');
 const attach = (app, db) => {
     const router = new Router();
     router
-        .get('/home', (req, res) => {
+        .get('/', (req, res) => {
             const user = req.user;
             const page = pageHandler
                 .choosePage(req.query.page);
@@ -27,21 +27,12 @@ const attach = (app, db) => {
                     });
                 })
                 .catch(() => {
-                    const showcategories = [];
-                    page = 1;
-                    const navigationNumbers = [];
-                    const pagesNum = 1;
-                    res.render('home', {
-                        showcategories,
-                        page,
-                        navigationNumbers,
-                        pagesNum,
-                        user,
-                    });
+                    const message = 'There is a problem with the connection.';
+                    res.render('404', {user, message});
                 });
         });
 
-    app.use('/', router);
+    app.use('/home', router);
 };
 
 module.exports = attach;
