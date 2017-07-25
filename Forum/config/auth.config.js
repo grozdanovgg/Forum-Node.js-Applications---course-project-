@@ -2,35 +2,8 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const { Strategy } = require('passport-local');
+const Crypto = require('../models/crypto');
 
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
-
-// let hashPhrase;
-// bcrypt.hash(myPlaintextPassword, saltRounds)
-//     .then(function(hash) {
-//         console.log(hash);
-//         hashPhrase = hash;
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//     });
-
-// Load hash from your password DB.
-// bcrypt.compare(myPlaintextPassword, hashPhrase)
-//     .then(function(res) {
-//         // res == true
-//         console.log(res);
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//     });
-// bcrypt.compare(someOtherPlaintextPassword, hashPhrase).then(function(res) {
-//     // res == false
-//     console.log(res);
-// });
 
 const configAuth = (app, database) => {
     passport.use(new Strategy({
@@ -38,10 +11,16 @@ const configAuth = (app, database) => {
         },
         (req, username, password, done) => {
             const email = req.body.email;
+
+            // const password = Crypto.encrypt(rawPassword);
+            // console.log(password);
             if (!email) {
+                // This is the Login, because no e-mail is sent
+                const cryptoPassword = Crypto.encrypt(password).toString();
+                console.log(cryptoPassword);
                 database.find('users', {
                         username: username,
-                        password: password
+                        password: cryptoPassword,
                     })
                     .then((users) => {
                         if (users.length < 1) {
@@ -55,8 +34,9 @@ const configAuth = (app, database) => {
                         return done(ex);
                     });
             } else {
-                const username = req.body.username;
-                const password = req.body.password;
+                // Register module
+                // const username = req.body.username;
+                // const password = req.body.password;
                 const repeatpassword = req.body.password_confirm;
                 const posts = [];
                 if (!password || !username || !email || !repeatpassword) {
@@ -74,6 +54,10 @@ const configAuth = (app, database) => {
                         const message = 'There is user with this username!';
                         done(message);
                     }
+                    // Here hash newPassword before input it in the database:
+                    // ===
+                    password = Crypto.encrypt(password).toString();
+                    // console.log(cryptoNewPassword);
                     const newUser = { username, password, email, posts };
                     database.insert('users', newUser).then(() => {
                         const message = 'Successfully Registered';
@@ -110,7 +94,7 @@ const configAuth = (app, database) => {
                 }
                 return done(null, users[0]);
             })
-            .catch((ex)=>done(ex));
+            .catch((ex) => done(ex));
     });
 };
 
