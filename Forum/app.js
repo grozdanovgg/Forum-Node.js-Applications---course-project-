@@ -38,6 +38,14 @@ const database = new Database(connectionstring);
 };
 database.insert('categories', category1).then((c) => console.log(c));*/
 
+// This drops the database.
+/*database.showAll('categories').then((categories)=>{
+    for(let i = 0; i < categories.length; i+=1) {
+        database.deleteAll('posts/'+categories[i].title);
+    }
+});
+database.deleteAll('users');*/
+
 authConfig(app, database);
 appRouth(app, database);
 posts(app, database);

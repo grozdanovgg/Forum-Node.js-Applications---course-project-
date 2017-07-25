@@ -109,7 +109,8 @@ const configAuth = (app, database) => {
                     return done('There is more than one user with this id');
                 }
                 return done(null, users[0]);
-            });
+            })
+            .catch((ex)=>done(ex));
     });
 };
 

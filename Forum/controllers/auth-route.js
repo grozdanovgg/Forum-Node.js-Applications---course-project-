@@ -44,7 +44,7 @@ const attach = (app, db) => {
         })
         .post('/profilePicture', upload.any(), (req, res) => {
             const user = req.user;
-            if(req.files) {
+            if(req.files.length > 0) {
                 res.send(req.files[0].filename);
                 db.find('users', {username: user.username})
                     .then((users) => {

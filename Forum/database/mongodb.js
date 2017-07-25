@@ -30,9 +30,7 @@ const database = class Database {
             this.connection
                 .then((db) => {
                     const updateCollection = db.collection(collection);
-                    updateCollection.update(filter, record, function(err, res) {
-                        db.close();
-                    });
+                    updateCollection.update(filter, record);
                     resolve(updateCollection
                         .find()
                         .toArray());
