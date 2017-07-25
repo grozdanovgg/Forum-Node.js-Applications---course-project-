@@ -49,11 +49,11 @@ block body
               p.text-muted You have to make your websites with love these days!
   section#portfolio.no-padding
     .container-fluid
-      .row.no-gutter.popup-gallery
+      .row.no-gutter
         - for (var i = 0; i < categories.length; ++i) {
           .col-lg-4.col-sm-6
             a.portfolio-box(href=`/Posts/${categories[i].title}`)
-              img.img-responsive-home(src=`/static/images/categories/cropped/${categories[i].title}.jpg`, alt='')
+              img.img-responsive-home(src=`/static/images/categories/cropped/${categories[i].title}.jpg`, alt=`${categories[i].title}`)
               .portfolio-box-caption
                 .portfolio-box-caption-content
                   .project-category.text-faded
