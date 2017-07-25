@@ -1,0 +1,6 @@
+extends shared/_master
+
+block body
+    .container
+        h1.my-4=user.username
+        button.btn.btn-success(href='/users/'+user.username+'/settings') Change Picture

@@ -17,10 +17,27 @@ const attach = (app, database) => {
                 const posts = foundUser.posts;
                 posts.reverse();
                 if (user&&user.username === username) {
-                    res.render('profile', { user: foundUser, posts, isMine: true });
+                    res.render('profile', { user, foundUser, posts, isMine: true });
                 } else {
-                    res.render('profile', { user: foundUser, posts, isMine: false });
+                    res.render('profile', { user, foundUser, posts, isMine: false });
                 }
+            })
+            .catch(() => {
+                const message = 'There was a problem finding the user.';
+                res.render('404', { user, message });
+            });
+        })
+         .get('/:username/settings', (req, res) => {
+            const user = req.user;
+            const username = req.params.username;
+            database.find('users', {username: username}).then((users)=>{
+                const foundUser = users[0];
+                if(!foundUser) {
+                    const message = 'There was a problem finding the user.';
+                    res.render('404', { user, message });
+                }
+                
+                res.render('settings', { user });
             })
             .catch(() => {
                 const message = 'There was a problem finding the user.';
