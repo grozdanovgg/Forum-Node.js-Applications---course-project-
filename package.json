@@ -1,7 +1,8 @@
 {
     "scripts": {
         "n": "node Forum/app.js",
-        "start": "./node_modules/.bin/nodemon Forum/app.js"
+        "start": "./node_modules/.bin/nodemon Forum/app.js",
+        "test": "mocha ./Forum/tests/simple-tests.js"
     },
     "dependencies": {
         "babel-eslint": "^7.2.3",
@@ -26,5 +27,8 @@
         "tether": "^1.4.0",
         "toastr": "^2.1.2"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "chai": "^4.1.0",
+        "mocha": "^3.4.2"
+    }
 }
