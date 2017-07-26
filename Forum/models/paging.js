@@ -38,6 +38,8 @@ class PageHandler {
     choosePage(page) {
         if (!page) {
             page = 1;
+        } else if(isNaN(page)) {
+            throw Error('Page is not a number.');
         } else {
             page = parseInt(page, 10);
         }
