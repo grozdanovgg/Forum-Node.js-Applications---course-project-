@@ -86,12 +86,12 @@ const database = class Database {
     }
 
     findById(collection, id) {
-        var objectId = new ObjectID(id);
+        const objectId = new ObjectID(id);
         return new Promise((resolve, reject) => {
             this.connection
                 .then((db) => {
                     const findCollection = db.collection(collection)
-                        .find({'_id': objectId})
+                        .find({ '_id': objectId })
                         .toArray();
                     resolve(findCollection);
                 })

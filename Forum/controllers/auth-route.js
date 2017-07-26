@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const passport = require('passport');
-var multer  = require('multer')
-const upload = multer({dest: 'Forum/static/images/profile/'});
+const multer = require('multer');
+const upload = multer({ dest: 'Forum/static/images/profile/' });
 
 const attach = (app, db) => {
     const router = new Router();
@@ -17,9 +17,9 @@ const attach = (app, db) => {
         .get('/register', (req, res) => {
             const user = req.user;
             if (user) {
-                const message = 'You are awready signed in.'
+                const message = 'You are awready signed in.';
                 res
-                    .render('404', {message});
+                    .render('404', { message });
             } else {
                 res.render('register');
             }
@@ -35,8 +35,8 @@ const attach = (app, db) => {
         })
         .get('/profilePicture', (req, res) => {
             const user = req.user;
-            if(user) {
-                res.render('picture', {user});
+            if (user) {
+                res.render('picture', { user });
             } else {
                 const message = 'You should be register, to upload picture.';
                 res.render('404', { user, message });
@@ -44,13 +44,13 @@ const attach = (app, db) => {
         })
         .post('/profilePicture', upload.any(), (req, res) => {
             const user = req.user;
-            if(req.files.length > 0) {
+            if (req.files.length > 0) {
                 res.send(req.files[0].filename);
-                db.find('users', {username: user.username})
+                db.find('users', { username: user.username })
                     .then((users) => {
-                        var changingUser = users[0];
+                        const changingUser = users[0];
                         changingUser.pictureName = req.files[0].filename;
-                        db.update('users', {username: user.username}, changingUser);
+                        db.update('users', { username: user.username }, changingUser);
                     });
             } else {
                 res.redirect('/hey');

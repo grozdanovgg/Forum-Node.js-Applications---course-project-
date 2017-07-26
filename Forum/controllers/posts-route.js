@@ -65,7 +65,7 @@ const attach = (app, db) => {
                 .catch(() => {
                     const message = 'There was a problem finding the posts.';
                     res.render('404', { user, message });
-                });;
+                });
         })
         .post('/:category', (req, res) => {
             const user = req.user;
@@ -97,7 +97,7 @@ const attach = (app, db) => {
                     const pagesNum = pagingResult.numberOfPages;
 
                     const id = posts[posts.length - 1]._id;
-                    
+
                     newPost[id] = id;
 
                     res.render('showposts', {
@@ -108,12 +108,16 @@ const attach = (app, db) => {
                         pagesNum,
                         user,
                     });
-                    db.find('users', { username: user.username }).then((users) => {
-                        const changingUser = users[0];
-                        console.log(changingUser);
-                        changingUser.posts.push(newPost);
-                        db.update('users', { username: user.username }, changingUser);
-                    });
+                    db.find('users', { username: user.username })
+                        .then((users) => {
+                            const changingUser = users[0];
+                            console.log(changingUser);
+                            changingUser.posts.push(newPost);
+                            db.update('users', {
+                                    username: user.username,
+                                },
+                                changingUser);
+                        });
                 })
                 .catch(() => {
                     const message = 'There was a problem inserting the post.';
@@ -147,25 +151,39 @@ const attach = (app, db) => {
                 date,
             };
             db.findById('posts/' + category, id).then((posts) => {
-                const newPost = posts[0];
-                newPost.comments.push(newComment);
-                db.update('posts/' + category, { title: newPost.title }, newPost).then((p) => {
-                    res.render('post', { user, category, post: newPost });
-                    db.find('users', {username: user.username}).then((users) => {
-                        const foundUser = users[0];
-                        const post = foundUser.posts.find((f)=>f.title===newPost.title);
-                        post.comments.push(newComment);
-                        const index = foundUser.posts.indexOf(post.title);
-                        foundUser.posts.splice(index, 1);
-                        foundUser.posts.push(post);
-                        db.update('users', { username: user.username }, foundUser);
-                    });
+                    const newPost = posts[0];
+                    newPost.comments.push(newComment);
+                    db.update('posts/' + category, {
+                                title: newPost.title,
+                            },
+                            newPost)
+                        .then((p) => {
+                            res.render('post', {
+                                user,
+                                category,
+                                post: newPost,
+                            });
+                            db.find('users', { username: user.username })
+                                .then((users) => {
+                                    const foundUser = users[0];
+                                    const post = foundUser.posts
+                                        .find((f) => f.title === newPost.title);
+                                    post.comments.push(newComment);
+                                    const index = foundUser.posts
+                                        .indexOf(post.title);
+                                    foundUser.posts.splice(index, 1);
+                                    foundUser.posts.push(post);
+                                    db.update(
+                                        'users', {
+                                            username: user.username,
+                                        }, foundUser);
+                                });
+                        });
+                })
+                .catch(() => {
+                    const message = 'There was a problem finding the post.';
+                    res.render('404', { user, message });
                 });
-            })
-            .catch(() => {
-                const message = 'There was a problem finding the post.';
-                res.render('404', { user, message });
-            });
         });
 
     app.use('/posts', router);

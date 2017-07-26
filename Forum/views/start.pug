@@ -1,14 +1,21 @@
 extends shared/_master
 
 block body
+  link(href='static/css/font-awesome.css' rel='stylesheet' type='text/css')
+
+  <!-- Plugin CSS -->
+  link(href='static/css/magnific-popup.css', rel='stylesheet')
+
+  <!-- Theme CSS -->
+  link(href='static/css/creative.css', rel='stylesheet')
   if !user
     header
       .header-content
         .header-content-inner
-          h1#homeHeading Your Favorite Source of Info
+          h1#homeHeading Your Favorite Sort of Forum
           hr
           p
-            | TellUS fourm is the perfect place to learn, to comunicate, to be social
+            //- | TellUS fourm is the perfect place to learn, to comunicate, to be social
           a.btn.btn-primary.btn-xl.page-scroll(href='#about') Find Out More
     section#about
       .container
@@ -69,7 +76,7 @@ block body
             hr.light
             p.text-faded
               | Our forum has everything you need to start connectin with the world.
-            a.page-scroll.btn.btn-default.btn-xl.sr-button(href='/auth/register') I'm in!
+            a.page-scroll.btn.btn-default.btn-xl.sr-button(href='/auth/register') I'm in!         
   if user
     br
     .container.chat-container

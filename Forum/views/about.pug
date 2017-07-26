@@ -1,6 +1,11 @@
 extends shared/_master
 
 block body
+  .alert.alert-success.alert-dismissable
+    a.close(href='#', data-dismiss='alert', aria-label='close') ×
+    strong Note!
+    |  This is a beta version product. Please consider that part of the website is 
+    under development and will be updated in the future
   header.masthead
     .overlay
       .container

@@ -28,7 +28,7 @@ const attach = (app, db) => {
                 })
                 .catch(() => {
                     const message = 'There is a problem with the connection.';
-                    res.render('404', {user, message});
+                    res.render('404', { user, message });
                 });
         });
 
