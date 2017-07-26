@@ -6,7 +6,7 @@ const database = class Database {
         this.connectionString = connectionString;
         this.connection = new Promise((resolve, reject) => {
             resolve(MongoClient.connect(this.connectionString));
-        })
+        });
     }
 
     insert(collection, record) {
