@@ -4,12 +4,13 @@ block body
     .container
         h1.my-4=foundUser.username
         if foundUser
-            img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/${foundUser.pictureName}`, alt='', height="150" width="150")
+            if foundUser.pictureName
+                img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/${foundUser.pictureName}`, alt='', height="150" width="150")
         else
             img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/default.jpg`, alt='', height="150" width="150")
         //small Secondary Text
         if isMine
-            button.btn.btn-success(href='/users/'+user.username+'/settings') Edit Profile
+            a.btn.btn-success(href='/users/'+user.username+'/settings') Edit Profile
         each post in posts
             h3=Posts
             // Project One
