@@ -19,9 +19,8 @@ const flash = require('connect-flash');
 const app = express();
 
 
-// const mongoURL = process.env.MONGO_DB_URL;
-// const connectionstring = 'mongodb://admin:adminadmin@10.0.22.131:27017/MongoDB-MongoDBStack-1GJGQ73ACA1kWM';
-const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
+const connectionstring = 'mongodb://ubuntu@ec2-52-57-79-63.eu-central-1.compute.amazonaws.com/MongoDB-Ubuntu';
+// const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
 // const connectionstring = 'mongodb://localhost/items-db';
 app.use(express.static(__dirname + '../Forum'));
 app.set('views', __dirname + '/views');
@@ -41,21 +40,23 @@ app.use(session({
 app.use(flash());
 const database = new Database(connectionstring);
 
-// sport, other, cars, space, men, women, clothing, movies, sex, music, programming, animals, school, work
-/* const category1 = {
-    title: 'Games',
-    bio: '',
-    posts: [],
-};
-database.insert('categories', category1).then((c) => console.log(c));*/
+// animals, cars, clothing, man, school, space, sport, women, sex, movies, music, programming, work, other,games
+//  const category1 = {
+//     title: 'Games',
+//     bio: '',
+//     posts: [],
+// };
+// database.insert('categories', category1).then((c) => console.log(c));
 
 // This drops the database.
-/*database.showAll('categories').then((categories)=>{
-    for(let i = 0; i < categories.length; i+=1) {
-        database.deleteAll('posts/'+categories[i].title);
-    }
-});
-database.deleteAll('users');*/
+// database.showAll('categories').then((categories)=>{
+//     for (let i = 0; i < categories.length; i+=1) {
+//         database.deleteAll(categories[i].title);
+//     }
+// });
+// database.deleteAll('users');
+// database.deleteAll('categories');
+// database.delete('categories', {title: 'Games'});
 
 authConfig(app, database);
 appRouth(app, database);
@@ -79,10 +80,10 @@ const category = {
 };
 database.insert('categories', category).then();*/
 
-//database.showAll('categories').then((th) => console.log(th));
+// database.showAll('categories').then((th) => console.log(th));
 
-//database.findById('categories','59743f13e392ab1c148c64b0').then((f)=>console.log(f));
-//database.update('test',{text:'a'},{text:'b'}).then((d)=>console.log(d));
+// database.findById('categories','59743f13e392ab1c148c64b0').then((f)=>console.log(f));
+// database.update('test',{text:'a'},{text:'b'}).then((d)=>console.log(d));
 
 
 const port = process.env.PORT || 3000;
