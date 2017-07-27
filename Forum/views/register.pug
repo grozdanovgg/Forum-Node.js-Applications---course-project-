@@ -13,8 +13,8 @@ block body
                     // Username
                     label.control-label(for='username') Username
                     .controls
-                        input#username.input-xlarge(required, type='text', name='username', placeholder='', value=username, minlength='3', maxlength='12',pattern='^[0-9A-Za-z\s\-]+$')
-                        p.help-block Username can contain any letters or numbers, without spaces, between 3 and 12 characters.
+                        input#username.input-xlarge(required, type='text', name='username', placeholder='', value=username, minlength='3', maxlength='25',pattern='^[0-9A-Za-z\s\-]+$')
+                        p.help-block Username can contain any letters or numbers, without spaces, between 3 and 25 characters.
                 .control-group
                     // E-mail
                     label.control-label(for='email') E-mail

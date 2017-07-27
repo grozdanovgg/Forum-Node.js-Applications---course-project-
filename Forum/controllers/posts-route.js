@@ -8,12 +8,18 @@ const attach = (app, db) => {
             const user = req.user;
             const page = pageHandler
                 .choosePage(req.query.page);
+            if(page.error) {
+                res.render('404',{message: page.error});
+            }
 
             db.showAll('posts')
                 .then((posts) => {
                     const size = 5;
                     const pagingResult = pageHandler
-                        .handle(posts, page, size, res);
+                        .handle(posts, page, size);
+                    if(pagingResult.error) {
+                        res.render('404',{message: pagingResult.error});
+                    }
 
                     const showposts = pagingResult.filteredCollection;
                     const showPages = pagingResult.navigationNumbers;
@@ -39,13 +45,19 @@ const attach = (app, db) => {
 
             const page = pageHandler
                 .choosePage(req.query.page);
+            if(page.error) {
+                res.render('404',{message: page.error});
+            }
 
             db.showAll('posts/' + category)
                 .then((posts) => {
                     posts.reverse();
                     const size = 5;
                     const pagingResult = pageHandler
-                        .handle(posts, page, size, res);
+                        .handle(posts, page, size);
+                    if(pagingResult.error) {
+                        res.render('404',{message: pagingResult.error});
+                    }
 
                     const showposts = pagingResult.filteredCollection;
 
@@ -74,6 +86,9 @@ const attach = (app, db) => {
             const post = req.body.post;
             const page = pageHandler
                 .choosePage(req.query.page);
+            if(page.error) {
+                res.render('404',{ message: page.error });
+            }
             console.log(user.pictureName);
             const newPost = {
                 title: title,
@@ -89,6 +104,9 @@ const attach = (app, db) => {
                     const size = 5;
                     const pagingResult = pageHandler
                         .handle(posts, page, size, res);
+                    if(pagingResult.error) {
+                        res.render('404',{ message: pagingResult.error });
+                    }
 
                     const showposts = pagingResult.filteredCollection;
 

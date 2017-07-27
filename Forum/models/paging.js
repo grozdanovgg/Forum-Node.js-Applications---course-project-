@@ -1,5 +1,5 @@
 class PageHandler {
-    handle(collection, page, size, res) {
+    handle(collection, page, size) {
         let i = 1;
         const filteredCollection = [];
         let pagesNum = Math.ceil(collection.length / size);
@@ -7,7 +7,8 @@ class PageHandler {
             pagesNum = 1;
         }
         if (page < 1 || page > pagesNum) {
-            res.redirect('404');
+            const error = 'Page is lower than 0 or highter than the count of pages.';
+            return { error };
         }
 
         let index = (i + ((page - 1) * size) - 1);
@@ -39,7 +40,8 @@ class PageHandler {
         if (!page) {
             page = 1;
         } else if(isNaN(page)) {
-            throw Error('Page is not a number.');
+            const error = 'Page is not a number.';
+            return { error };
         } else {
             page = parseInt(page, 10);
         }

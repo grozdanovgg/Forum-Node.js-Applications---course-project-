@@ -17,7 +17,7 @@ const attach = (app, db) => {
         .get('/register', (req, res) => {
             const user = req.user;
             if (user) {
-                const message = 'You are awready signed in.';
+                const message = 'You are allready signed in.';
                 res
                     .render('404', { message });
             } else {
@@ -45,15 +45,21 @@ const attach = (app, db) => {
         .post('/profilePicture', upload.any(), (req, res) => {
             const user = req.user;
             if (req.files.length > 0) {
-                res.send(req.files[0].filename);
                 db.find('users', { username: user.username })
                     .then((users) => {
                         const changingUser = users[0];
                         changingUser.pictureName = req.files[0].filename;
-                        db.update('users', { username: user.username }, changingUser);
+                        db.update('users', { username: user.username }, changingUser)
+                            .then(() => {
+                                res.redirect('/');
+                            })
+                            .catch(() => {
+                                const message = 'Problem connecting to database.';
+                                res.render('404', { message });
+                            });
                     });
             } else {
-                res.redirect('/hey');
+                res.redirect('/');
             }
         });
 

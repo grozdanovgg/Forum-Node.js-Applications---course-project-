@@ -8,12 +8,18 @@ const attach = (app, db) => {
             const user = req.user;
             const page = pageHandler
                 .choosePage(req.query.page);
+            if(page.error) {
+                res.render('404',{message: page.error});
+            }
 
             db.showAll('categories')
                 .then((categories) => {
                     const size = 8;
                     const pagingResult = pageHandler
-                        .handle(categories, page, size, res);
+                        .handle(categories, page, size);
+                    if(pagingResult.error) {
+                        res.render('404',{message: pagingResult.error});
+                    }
 
                     const showcategories = pagingResult.filteredCollection;
                     const navigationNumbers = pagingResult.navigationNumbers;
