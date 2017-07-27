@@ -7,7 +7,7 @@ class PageHandler {
             pagesNum = 1;
         }
         if (page < 1 || page > pagesNum) {
-            const error = 'Page is lower than 0 or highter than the count of pages.';
+            const error = 'Page is above / bellow range.';
             return { error };
         }
 
@@ -39,7 +39,7 @@ class PageHandler {
     choosePage(page) {
         if (!page) {
             page = 1;
-        } else if(isNaN(page)) {
+        } else if (isNaN(page)) {
             const error = 'Page is not a number.';
             return { error };
         } else {

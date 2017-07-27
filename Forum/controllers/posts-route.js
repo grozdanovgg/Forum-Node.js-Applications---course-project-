@@ -8,8 +8,8 @@ const attach = (app, db) => {
             const user = req.user;
             const page = pageHandler
                 .choosePage(req.query.page);
-            if(page.error) {
-                res.render('404',{message: page.error});
+            if (page.error) {
+                res.render('404', { message: page.error });
             }
 
             db.showAll('posts')
@@ -17,8 +17,8 @@ const attach = (app, db) => {
                     const size = 5;
                     const pagingResult = pageHandler
                         .handle(posts, page, size);
-                    if(pagingResult.error) {
-                        res.render('404',{message: pagingResult.error});
+                    if (pagingResult.error) {
+                        res.render('404', { message: pagingResult.error });
                     }
 
                     const showposts = pagingResult.filteredCollection;
@@ -45,8 +45,8 @@ const attach = (app, db) => {
 
             const page = pageHandler
                 .choosePage(req.query.page);
-            if(page.error) {
-                res.render('404',{message: page.error});
+            if (page.error) {
+                res.render('404', { message: page.error });
             }
 
             db.showAll('posts/' + category)
@@ -55,8 +55,8 @@ const attach = (app, db) => {
                     const size = 5;
                     const pagingResult = pageHandler
                         .handle(posts, page, size);
-                    if(pagingResult.error) {
-                        res.render('404',{message: pagingResult.error});
+                    if (pagingResult.error) {
+                        res.render('404', { message: pagingResult.error });
                     }
 
                     const showposts = pagingResult.filteredCollection;
@@ -86,8 +86,8 @@ const attach = (app, db) => {
             const post = req.body.post;
             const page = pageHandler
                 .choosePage(req.query.page);
-            if(page.error) {
-                res.render('404',{ message: page.error });
+            if (page.error) {
+                res.render('404', { message: page.error });
             }
             console.log(user.pictureName);
             const newPost = {
@@ -103,9 +103,9 @@ const attach = (app, db) => {
                     posts.reverse();
                     const size = 5;
                     const pagingResult = pageHandler
-                        .handle(posts, page, size, res);
-                    if(pagingResult.error) {
-                        res.render('404',{ message: pagingResult.error });
+                        .handle(posts, page, size);
+                    if (pagingResult.error) {
+                        res.render('404', { message: pagingResult.error });
                     }
 
                     const showposts = pagingResult.filteredCollection;

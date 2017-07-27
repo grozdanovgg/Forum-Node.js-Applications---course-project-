@@ -136,7 +136,7 @@ describe('Paging tests', () => {
             const result = pageHandler.handle(collection, page, size, res);
 
             // Assert
-            expect(result.error).to.deep.eq('Page is lower than 0 or highter than the count of pages.');
+            expect(result.error).to.deep.eq('Page is above / bellow range.');
         });
     });
 

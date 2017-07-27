@@ -1,7 +1,7 @@
 /* eslint max-len: ["error",  { "ignoreRegExpLiterals": true } ]*/
 const passport = require('passport');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+// const cookieParser = require('cookie-parser');
+// const session = require('express-session');
 const { Strategy } = require('passport-local');
 const Crypto = require('../models/crypto');
 
@@ -22,82 +22,94 @@ const configAuth = (app, database) => {
         (req, username, password, done) => {
             const email = req.body.email;
 
-            // const password = Crypto.encrypt(rawPassword);
-            // console.log(password);
             if (!email) {
                 // This is the Login, because no e-mail is sent
                 const cryptoPassword = Crypto.encrypt(password).toString();
                 console.log(cryptoPassword);
-                database.find('users', {
+                return database.find('users', {
                         username: username,
                         password: cryptoPassword,
                     })
                     .then((users) => {
                         if (users.length < 1) {
-                            return;
+                            return done(null, false, {
+                                message: 'Wrong username or password',
+                            });
                         } else if (users.length > 1) {
-                            return;
+                            return done(null, false, {
+                                message: 'Problem with duplicate user',
+                            });
                         }
-                        done(null, users[0]);
+                        return done(null, users[0]);
                     })
                     .catch((ex) => {
                         return done(ex);
                     });
-            } else {
-                // Register module
-                // const username = req.body.username;
-                // const password = req.body.password;
-                const repeatpassword = req.body.password_confirm;
-                const posts = [];
-                if (!password || !username || !email || !repeatpassword) {
-                    const message = 'All fields are required!';
-                    done(message);
-                }
+            }
+            // Register module
+            // const username = req.body.username;
+            // const password = req.body.password;
+            const repeatpassword = req.body.password_confirm;
+            const posts = [];
+            if (!password || !username || !email || !repeatpassword) {
+                return done(null, false, {
+                    message: 'All fields are required!',
+                });
+            }
 
-                if (password !== repeatpassword) {
-                    const message = 'Passwords are not the same!';
-                    done(message);
-                }
-                if (password.length < 4) {
-                    const message = 'Password must be at 4 characters long!';
-                    done(message);
-                }
-                if (!validateEmail(email)) {
-                    const message = 'The e-mail is not valid';
-                    done(message);
-                }
-                if (!validateUsername(username)) {
-                    const message = 'Username should be alphanumerical';
-                    done(message);
-                }
-                database.find('users', { 'username': username })
-                    .then((users) => {
-                        if (users.length > 0) {
-                            const message = 'There is user with this username!';
-                            done(message);
-                        }
-                        // Here hash newPassword before 
-                        // input it in the database:
-                        password = Crypto.encrypt(password).toString();
-                        const newUser = { username, password, email, posts };
-                        database.insert('users', newUser).then(() => {
+            if (password !== repeatpassword) {
+                return done(null, false, {
+                    message: 'Passwords are not the same!',
+                });
+            }
+            if (password.length < 4) {
+                return done(null, false, {
+                    message: 'Password must be at 4 characters long!',
+                });
+            }
+            if (!validateEmail(email)) {
+                return done(null, false, {
+                    message: 'The e-mail is not valid',
+                });
+            }
+            if (!validateUsername(username)) {
+                return done(null, false, {
+                    message: 'Username should be alphanumerical',
+                });
+            }
+            return database.find('users', { 'username': username })
+                .then((users) => {
+                    if (users.length > 0) {
+                        return done(null, false, {
+                            message: 'Username is taken',
+                        });
+                    }
+                    // Here hash newPassword before 
+                    // input it in the database:
+                    password = Crypto.encrypt(password).toString();
+                    const newUser = { username, password, email, posts };
+                    return database.insert('users', newUser)
+                        .then(() => {
                             // const message = 'Successfully Registered';
                             done(null, newUser);
                         }).catch(() => {
                             const message = 'Some problem with registering';
                             done(message);
                         });
-                    });
-            }
+                })
+                .catch((err) => {
+                    const message = 'Some problem with users database';
+                    done(message);
+                });
         }
     ));
 
-    app.use(cookieParser());
-    app.use(session({
-        secret: 'Purple Unicorn',
-        resave: true,
-        saveUninitialized: true,
-    }));
+    // app.use(cookieParser());
+    // app.use(session({
+    //     secret: 'Purple Unicorn',
+    //     resave: true,
+    //     saveUninitialized: true,
+    // }));
     app.use(passport.initialize());
     app.use(passport.session());
 

@@ -3,11 +3,12 @@ const passport = require('passport');
 const multer = require('multer');
 const upload = multer({ dest: 'Forum/static/images/profile/' });
 
+
 const attach = (app, db) => {
     const router = new Router();
     router
         .get('/login', (req, res) => {
-            return res.render('login');
+            return res.render('login', { message: req.flash('error') });
         })
         .post('/login', passport.authenticate('local', {
             successRedirect: '/',
@@ -17,11 +18,10 @@ const attach = (app, db) => {
         .get('/register', (req, res) => {
             const user = req.user;
             if (user) {
-                const message = 'You are allready signed in.';
-                res
-                    .render('404', { message });
+                // const message = 'You are allready signed in.';
+                res.render('register', { message: req.flash('error') });
             } else {
-                res.render('register');
+                res.render('register', { message: req.flash('error') });
             }
         })
         .post('/register', passport.authenticate('local', {
@@ -49,12 +49,14 @@ const attach = (app, db) => {
                     .then((users) => {
                         const changingUser = users[0];
                         changingUser.pictureName = req.files[0].filename;
-                        db.update('users', { username: user.username }, changingUser)
+                        db.update('users', {
+                                username: user.username,
+                            }, changingUser)
                             .then(() => {
                                 res.redirect('/');
                             })
                             .catch(() => {
-                                const message = 'Problem connecting to database.';
+                                const message = 'Problem with database...';
                                 res.render('404', { message });
                             });
                     });

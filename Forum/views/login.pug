@@ -3,11 +3,13 @@ extends shared/_master
 block body
     .container
         br
+        if message
+            h1.error-message=message
         form(action='/auth/login', method='post')
             div
                 label Username:
                 br
-                input(type='text', name='username')
+                input(type='text', name='username', autofocus)
             div
                 label Password:
                 br

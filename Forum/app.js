@@ -11,12 +11,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const authConfig = require('./config/auth.config');
 const Database = require('./database/mongodb');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 
 
-// Socket IO not working correctly...
 const app = express();
-// const http = require('http').Server(app);
-// var io = require('socket.io')(http);
+
 
 // const mongoURL = process.env.MONGO_DB_URL;
 // const connectionstring = 'mongodb://admin:adminadmin@10.0.22.131:27017/MongoDB-MongoDBStack-1GJGQ73ACA1kWM';
@@ -28,6 +29,16 @@ app.set('view engine', 'pug');
 app.use('/static', express.static(path.join(__dirname, './static')));
 app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser('secret'));
+app.use(session({
+    secret: 'tellus a secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 60000,
+    },
+}));
+app.use(flash());
 const database = new Database(connectionstring);
 
 // sport, other, cars, space, men, women, clothing, movies, sex, music, programming, animals, school, work
