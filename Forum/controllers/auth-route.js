@@ -44,6 +44,9 @@ const attach = (app, db) => {
         })
         .post('/profilePicture', upload.any(), (req, res) => {
             const user = req.user;
+            if (!user) {
+                res.redirect('/auth/login');
+            }
             if (req.files.length > 0) {
                 db.find('users', { username: user.username })
                     .then((users) => {

@@ -71,6 +71,9 @@ const attach = (app, database) => {
         })
         .post('/:username/:id', (req, res) => {
             const user = req.user;
+            if (!user) {
+                res.redirect('/auth/login');
+            }
             const id = req.params.id;
             const username = req.params.username;
             const date = new Date();

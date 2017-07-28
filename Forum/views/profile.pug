@@ -3,8 +3,7 @@ extends shared/_master
 block body
     .container
         h1.my-4=foundUser.username
-        if foundUser
-            if foundUser.pictureName
+        if foundUser.pictureName
                 img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/${foundUser.pictureName}`, alt='', height="150" width="150")
         else
             img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/default.jpg`, alt='', height="150" width="150")

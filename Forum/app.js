@@ -40,8 +40,9 @@ app.use(session({
 app.use(flash());
 const database = new Database(connectionstring);
 
-// animals, cars, clothing, man, school, space, sport, women, sex, movies, music, programming, work, other,games
-//  const category1 = {
+// animals, cars, clothing, man, school, space, 
+// sport, women, sex, movies, music, programming, work, other,games
+// const category1 = {
 //     title: 'Games',
 //     bio: '',
 //     posts: [],
@@ -49,14 +50,12 @@ const database = new Database(connectionstring);
 // database.insert('categories', category1).then((c) => console.log(c));
 
 // This drops the database.
-// database.showAll('categories').then((categories)=>{
-//     for (let i = 0; i < categories.length; i+=1) {
-//         database.deleteAll(categories[i].title);
-//     }
-// });
-// database.deleteAll('users');
-// database.deleteAll('categories');
-// database.delete('categories', {title: 'Games'});
+/* database.showAll('categories').then((categories) => {
+    for (let i = 0; i < categories.length; i += 1) {
+        database.deleteAll('posts/' + categories[i].title);
+    }
+});
+database.deleteAll('users');*/
 
 authConfig(app, database);
 appRouth(app, database);

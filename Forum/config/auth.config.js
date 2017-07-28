@@ -1,7 +1,7 @@
 /* eslint max-len: ["error",  { "ignoreRegExpLiterals": true } ]*/
 const passport = require('passport');
-// const cookieParser = require('cookie-parser');
-// const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const { Strategy } = require('passport-local');
 const Crypto = require('../models/crypto');
 
@@ -25,7 +25,6 @@ const configAuth = (app, database) => {
             if (!email) {
                 // This is the Login, because no e-mail is sent
                 const cryptoPassword = Crypto.encrypt(password).toString();
-                console.log(cryptoPassword);
                 return database.find('users', {
                         username: username,
                         password: cryptoPassword,
@@ -104,12 +103,12 @@ const configAuth = (app, database) => {
         }
     ));
 
-    // app.use(cookieParser());
-    // app.use(session({
-    //     secret: 'Purple Unicorn',
-    //     resave: true,
-    //     saveUninitialized: true,
-    // }));
+    app.use(cookieParser());
+    app.use(session({
+        secret: 'Purple Unicorn',
+        resave: true,
+        saveUninitialized: true,
+    }));
     app.use(passport.initialize());
     app.use(passport.session());
 

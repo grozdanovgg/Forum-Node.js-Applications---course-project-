@@ -81,6 +81,9 @@ const attach = (app, db) => {
         })
         .post('/:category', (req, res) => {
             const user = req.user;
+            if (!user) {
+                res.redirect('/auth/login');
+            }
             const category = req.params.category;
             const title = req.body.title;
             const post = req.body.post;
@@ -158,6 +161,9 @@ const attach = (app, db) => {
         })
         .post('/:category/:id', (req, res) => {
             const user = req.user;
+            if (!user) {
+                res.redirect('/');
+            }
             const category = req.params.category;
             const id = req.params.id;
             const date = new Date();
