@@ -4,7 +4,13 @@ const attach = (app, db) => {
     const router = new Router();
     router
         .get('/', (req, res) => {
-            const user = req.user;
+            let user = req.user;
+            if (user) {
+                console.log('here');
+                app.locals.currentUser = user;
+            } else {
+                user = req.app.locals.currentUser;
+            }
             db.showAll('categories')
                 .then((categories) => {
                     res.render('start', {

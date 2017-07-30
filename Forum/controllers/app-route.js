@@ -5,7 +5,7 @@ const attach = (app, db) => {
     const router = new Router();
     router
         .get('/', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             const page = pageHandler
                 .choosePage(req.query.page);
             if (page.error) {

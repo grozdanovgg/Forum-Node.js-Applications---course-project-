@@ -19,8 +19,8 @@ const flash = require('connect-flash');
 const app = express();
 
 
-const connectionstring = 'mongodb://ubuntu@ec2-52-57-79-63.eu-central-1.compute.amazonaws.com/MongoDB-Ubuntu';
-// const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
+// const connectionstring = 'mongodb://ubuntu@ec2-52-57-79-63.eu-central-1.compute.amazonaws.com/MongoDB-Ubuntu';
+const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
 // const connectionstring = 'mongodb://localhost/items-db';
 app.use(express.static(__dirname + '../Forum'));
 app.set('views', __dirname + '/views');

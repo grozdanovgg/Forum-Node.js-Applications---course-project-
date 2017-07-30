@@ -16,7 +16,7 @@ const attach = (app, db) => {
             failureFlash: true,
         }))
         .get('/register', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             if (user) {
                 // const message = 'You are allready signed in.';
                 res.render('register', { message: req.flash('error') });
@@ -31,10 +31,11 @@ const attach = (app, db) => {
         }))
         .get('/logout', (req, res) => {
             req.logout();
+            req.app.locals.currentUser = null;
             res.redirect('/');
         })
         .get('/profilePicture', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             if (user) {
                 res.render('picture', { user });
             } else {
@@ -43,7 +44,7 @@ const attach = (app, db) => {
             }
         })
         .post('/profilePicture', upload.any(), (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             if (!user) {
                 res.redirect('/auth/login');
             }

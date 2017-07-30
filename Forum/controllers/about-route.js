@@ -5,7 +5,7 @@ const attach = (app) => {
     const router = new Router();
     router
         .get('/', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             res.render('about', { user });
         });
 

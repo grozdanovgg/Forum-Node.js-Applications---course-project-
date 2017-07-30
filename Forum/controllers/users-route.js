@@ -6,7 +6,7 @@ const attach = (app, database) => {
     const router = new Router();
     router
         .get('/:username', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             const username = req.params.username;
             database.find('users', { username: username }).then((users) => {
                     const foundUser = users[0];
@@ -38,7 +38,7 @@ const attach = (app, database) => {
                 });
         })
         .get('/:username/settings', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             const username = req.params.username;
             database.find('users', { username: username }).then((users) => {
                     const foundUser = users[0];
@@ -55,7 +55,7 @@ const attach = (app, database) => {
                 });
         })
         .get('/:username/:id', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             const id = req.params.id;
             const username = req.params.username;
             database.find('users', { username }).then((u) => {
@@ -70,7 +70,7 @@ const attach = (app, database) => {
                 });
         })
         .post('/:username/:id', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             if (!user) {
                 res.redirect('/auth/login');
             }

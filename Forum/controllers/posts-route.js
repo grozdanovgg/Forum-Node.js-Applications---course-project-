@@ -5,7 +5,7 @@ const attach = (app, db) => {
     const router = new Router();
     router
         .get('/', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             const page = pageHandler
                 .choosePage(req.query.page);
             if (page.error) {
@@ -39,7 +39,7 @@ const attach = (app, db) => {
                 });
         })
         .get('/:category', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             const category = req.params.category;
             // console.log(category);
 
@@ -80,7 +80,7 @@ const attach = (app, db) => {
                 });
         })
         .post('/:category', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             if (!user) {
                 res.redirect('/auth/login');
             }
@@ -146,7 +146,7 @@ const attach = (app, db) => {
                 });
         })
         .get('/:category/:id', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             const category = req.params.category;
             const id = req.params.id;
             db.findById('posts/' + category, id).then((posts) => {
@@ -160,7 +160,7 @@ const attach = (app, db) => {
             });
         })
         .post('/:category/:id', (req, res) => {
-            const user = req.user;
+            const user = req.app.locals.currentUser;
             if (!user) {
                 res.redirect('/');
             }
