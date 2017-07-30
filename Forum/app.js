@@ -1,12 +1,11 @@
 /* globals __dirname, process  */
 /* eslint no-process-env: off*/
 const express = require('express');
-const appRouth = require('./controllers/app-route');
-const posts = require('./controllers/posts-route');
-const users = require('./controllers/users-route');
-const auth = require('./controllers/auth-route');
-const about = require('./controllers/about-route');
-const start = require('./controllers/start-route');
+const posts = require('./routes/posts/posts-route');
+const users = require('./routes/users/users-route');
+const auth = require('./routes/auth/auth-route');
+const about = require('./routes/about/about-route');
+const start = require('./routes/start/start-route');
 const path = require('path');
 const bodyParser = require('body-parser');
 const authConfig = require('./config/auth.config');
@@ -58,7 +57,6 @@ const database = new Database(connectionstring);
 database.deleteAll('users');*/
 
 authConfig(app, database);
-appRouth(app, database);
 posts(app, database);
 users(app, database);
 auth(app, database);
