@@ -1,5 +1,4 @@
 /* globals __dirname, process  */
-/* eslint no-process-env: off*/
 const express = require('express');
 const posts = require('./routes/posts/posts-route');
 const users = require('./routes/users/users-route');
@@ -14,30 +13,58 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 
+const init = (serverConfig) => {
+    const app = express();
 
-const app = express();
+    const connectionstring = serverConfig.connectionString;
+    const sessionSecret = serverConfig.sessionSecret;
 
+    app.use(express.static(__dirname + '../Forum'));
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'pug');
+    app.use('/static', express.static(path.join(__dirname, './static')));
+    app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(cookieParser('secret'));
+    app.use(session({
+        secret: sessionSecret,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 60000,
+        },
+    }));
+    app.use(flash());
+    const database = new Database(connectionstring);
 
-// const connectionstring = 'mongodb://ubuntu@ec2-52-57-79-63.eu-central-1.compute.amazonaws.com/MongoDB-Ubuntu';
-const connectionstring = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/tellusdb';
-// const connectionstring = 'mongodb://localhost/items-db';
-app.use(express.static(__dirname + '../Forum'));
-app.set('views', __dirname + '/views');
-app.set('view engine', 'pug');
-app.use('/static', express.static(path.join(__dirname, './static')));
-app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser('secret'));
-app.use(session({
-    secret: 'tellus a secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: 60000,
-    },
-}));
-app.use(flash());
-const database = new Database(connectionstring);
+    authConfig(app, database);
+    // appRouth(app, database);
+    posts(app, database);
+    users(app, database);
+    auth(app, database);
+    about(app);
+    start(app, database);
+
+    return Promise.resolve(app);
+};
+
+module.exports = {
+    init,
+};
+
+// Tutorial for using database
+/* database.deleteAll('categories');
+const category = {
+    title: 'Other',
+    posts: [],
+};
+database.insert('categories', category).then();*/
+// database.showAll('categories').then((th) => console.log(th));
+// database.findById('categories','59743f13e392ab1c148c64b0').then((f)=>console.log(f));
+// database.update('test',{text:'a'},{text:'b'}).then((d)=>console.log(d));
+// database.showAll('users').then(u => console.log(u));
+// database.deleteAll('posts/Sport');
+// database.deleteAll('users');
 
 // animals, cars, clothing, man, school, space, 
 // sport, women, sex, movies, music, programming, work, other,games
@@ -49,53 +76,11 @@ const database = new Database(connectionstring);
 // database.insert('categories', category1).then((c) => console.log(c));
 
 // This drops the database.
-/* database.showAll('categories').then((categories) => {
-    for (let i = 0; i < categories.length; i += 1) {
-        database.deleteAll('posts/' + categories[i].title);
-    }
-});
-database.deleteAll('users');*/
-
-authConfig(app, database);
-posts(app, database);
-users(app, database);
-auth(app, database);
-about(app);
-start(app, database);
-
-// database.showAll('users').then(u => console.log(u));
-// database.deleteAll('posts/Sport');
+// database.showAll('categories').then((categories)=>{
+//     for (let i = 0; i < categories.length; i+=1) {
+//         database.deleteAll(categories[i].title);
+//     }
+// });
 // database.deleteAll('users');
-
-
-// Tutorial for using database
-
-/* database.deleteAll('categories');
-const category = {
-    title: 'Other',
-    posts: [],
-};
-database.insert('categories', category).then();*/
-
-// database.showAll('categories').then((th) => console.log(th));
-
-// database.findById('categories','59743f13e392ab1c148c64b0').then((f)=>console.log(f));
-// database.update('test',{text:'a'},{text:'b'}).then((d)=>console.log(d));
-
-
-const port = process.env.PORT || 3000;
-
-const server = app.listen(port, () =>
-    console.log('Magic is running at' + port + '/')
-);
-
-
-const io = require('socket.io').listen(server);
-
-io.on('connection', function(socket) {
-    // Server side receiving the message then emmiting 
-    // it again for each client to handle
-    socket.on('chat message', (msgData) => {
-        io.emit('chat message', msgData);
-    });
-});
+// database.deleteAll('categories');
+// database.delete('categories', {title: 'Games'});

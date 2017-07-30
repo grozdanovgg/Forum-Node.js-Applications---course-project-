@@ -1,7 +1,7 @@
 {
     "scripts": {
         "n": "node Forum/app.js",
-        "start": "./node_modules/.bin/nodemon Forum/app.js",
+        "start": "./node_modules/.bin/nodemon Forum/server.js",
         "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha Forum/tests/unit/*.js"
     },
     "dependencies": {
@@ -32,6 +32,10 @@
     },
     "devDependencies": {
         "chai": "^4.1.0",
-        "mocha": "^3.4.2"
+        "gulp": "^3.9.1",
+        "gulp-istanbul": "^1.1.2",
+        "gulp-mocha": "^4.3.1",
+        "mocha": "^3.4.2",
+        "selenium-webdriver": "^3.5.0"
     }
 }
