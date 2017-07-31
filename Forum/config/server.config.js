@@ -6,4 +6,6 @@ const connectionString = 'mongodb://myuser:ednodvetri@ds011462.mlab.com:11462/te
 
 const sessionSecret = 'tellus a secret';
 
-module.exports = { port, connectionString, sessionSecret };
+const bodyParserType = 'url';
+
+module.exports = { port, connectionString, sessionSecret, bodyParserType };

@@ -18,13 +18,18 @@ const init = (serverConfig) => {
 
     const connectionstring = serverConfig.connectionString;
     const sessionSecret = serverConfig.sessionSecret;
+    const bodyParserType = serverConfig.bodyParserType;
 
     app.use(express.static(__dirname + '../Forum'));
     app.set('views', __dirname + '/views');
     app.set('view engine', 'pug');
     app.use('/static', express.static(path.join(__dirname, './static')));
     app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
-    app.use(bodyParser.urlencoded({ extended: true }));
+    if (bodyParserType === 'url') {
+        app.use(bodyParser.urlencoded({ extended: true }));
+    } else {
+        app.use(bodyParser.json());
+    }
     app.use(cookieParser('secret'));
     app.use(session({
         secret: sessionSecret,
@@ -36,6 +41,12 @@ const init = (serverConfig) => {
     }));
     app.use(flash());
     const database = new Database(connectionstring);
+
+    /* const category = {
+        title: 'Other',
+        posts: [],
+    };
+    database.insert('categories', category);*/
 
     authConfig(app, database);
     posts(app, database);
@@ -59,7 +70,8 @@ const category = {
 };
 database.insert('categories', category).then();*/
 // database.showAll('categories').then((th) => console.log(th));
-// database.findById('categories','59743f13e392ab1c148c64b0').then((f)=>console.log(f));
+// database.findById('categories','59743f13e392ab1c148c64b0')
+// .then((f)=>console.log(f));
 // database.update('test',{text:'a'},{text:'b'}).then((d)=>console.log(d));
 // database.showAll('users').then(u => console.log(u));
 // database.deleteAll('posts/Sport');
