@@ -36,24 +36,24 @@ html(lang='en')
 					ul.navbar-nav.ml-auto
 						if user
 							li.nav-item.naveffect
-								a.nav-link(href='/users/'+user.username)
+								a#user-profile-button.nav-link(href='/users/'+user.username)
 									span.blue(data-hover=user.username.substring(0, 25))=user.username.substring(0, 25)
 							//- li.nav-item.naveffect
 							//- 	a.nav-link(href='/users/settings')
 							//- 		span.blue(data-hover='Settings') Settings
 						else
 							li.nav-item.naveffect
-								a.nav-link(href='/auth/login')
+								a.nav-link#nav-button-login(href='/auth/login')
 									span(data-hover='Login') Login
 							li.nav-item.naveffect
-								a.nav-link(href='/auth/register')
+								a.nav-link#nav-button-register(href='/auth/register')
 									span(data-hover='Register') Register
 						li.nav-item.naveffect
-							a.nav-link(href='/about/')
+							a.nav-link#nav-button-about(href='/about/')
 								span(data-hover='About') About
 						if user
 							li.nav-item.naveffect
-								a.nav-link(href='/auth/logout')
+								a.nav-link#nav-button-user(href='/auth/logout')
 									span(data-hover='Logout') Logout					
 	block body
 

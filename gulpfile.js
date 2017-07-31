@@ -45,7 +45,7 @@ gulp.task('server-stop', () => {
 
 // @ts-ignore
 gulp.task('tests:browser', ['server-start'], () => {
-    return gulp.src('./Forum/tests/browser/**/*.js')
+    return gulp.src('./Forum/tests/browser/auth/auth.js')
         .pipe(mocha({
             // reporter: 'nyan',
             timeout: 15000,
