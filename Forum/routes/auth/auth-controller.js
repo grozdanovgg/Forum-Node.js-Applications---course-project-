@@ -16,8 +16,13 @@ const controller = {
         req.app.locals.currentUser = null;
         res.redirect('/');
     },
-    pictureSettings(req, res) {
-        const user = req.app.locals.currentUser;
+    pictureSettings(req, res, app) {
+        let user = req.user;
+        if (user && !app.locals.currentUser) {
+            app.locals.currentUser = user;
+        } else {
+            user = req.app.locals.currentUser;
+        }
         if (user) {
             res.render('picture', { user });
         } else {

@@ -28,7 +28,7 @@ const attach = (app, db) => {
             controller.logout(req, res);
         })
         .get('/profilePicture', (req, res) => {
-            controller.pictureSettings(req, res);
+            controller.pictureSettings(req, res, app);
         })
         .post('/profilePicture', upload.any(), (req, res) => {
             controller.changePicture(req, res, db);

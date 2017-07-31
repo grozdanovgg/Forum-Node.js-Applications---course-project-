@@ -21,7 +21,7 @@ describe('About-controller tests', () => {
             controller.showAbout(req, res);
 
             // Assert
-            sinon.assert.called(res.render);
+            sinon.assert.calledWith(res.render, 'about');
         });
     });
 });

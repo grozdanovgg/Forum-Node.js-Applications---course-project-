@@ -38,7 +38,6 @@ const init = (serverConfig) => {
     const database = new Database(connectionstring);
 
     authConfig(app, database);
-    // appRouth(app, database);
     posts(app, database);
     users(app, database);
     auth(app, database);

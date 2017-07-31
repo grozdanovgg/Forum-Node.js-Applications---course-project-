@@ -2,7 +2,6 @@ const controller = {
     showHome(req, res, app, db) {
         let user = req.user;
         if (user && !app.locals.currentUser) {
-            console.log('here');
             app.locals.currentUser = user;
         } else {
             user = req.app.locals.currentUser;
