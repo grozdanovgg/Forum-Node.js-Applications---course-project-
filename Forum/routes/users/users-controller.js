@@ -6,7 +6,7 @@ const controller = {
                 const foundUser = users[0];
                 if (!foundUser) {
                     const message = 'There was a problem finding the user.';
-                    res.render('404', { user, message });
+                    res.status(404).render('404', { user, message });
                 }
                 const posts = foundUser.posts;
                 posts.reverse();
@@ -28,7 +28,7 @@ const controller = {
             })
             .catch(() => {
                 const message = 'There was a problem finding the user.';
-                res.render('404', { user, message });
+                res.status(404).render('404', { user, message });
             });
     },
 
@@ -39,14 +39,14 @@ const controller = {
                 const foundUser = users[0];
                 if (!foundUser) {
                     const message = 'There was a problem finding the user.';
-                    res.render('404', { user, message });
+                    res.status(404).render('404', { user, message });
                 }
 
                 res.render('settings', { user });
             })
             .catch(() => {
                 const message = 'There was a problem finding the user.';
-                res.render('404', { user, message });
+                res.status(404).render('404', { user, message });
             });
     },
     showUserPost(req, res, db) {
@@ -61,7 +61,7 @@ const controller = {
             })
             .catch(() => {
                 const message = 'There was a problem finding the post.';
-                res.render('404', { user, message });
+                res.status(404).render('404', { user, message });
             });
     },
     createUserComment(req, res, db) {
@@ -112,7 +112,7 @@ const controller = {
             })
             .catch(() => {
                 const message = 'There was a problem finding the user.';
-                res.render('404', { user, message });
+                res.status(404).render('404', { user, message });
             });
     },
 };

@@ -15,7 +15,7 @@ const controller = {
             })
             .catch((error) => {
                 const message = 'There is a problem with the connection.';
-                res.render('404', { user, message });
+                res.status(404).render('404', { user, message });
             });
     },
 

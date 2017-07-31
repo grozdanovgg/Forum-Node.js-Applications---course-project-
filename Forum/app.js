@@ -59,7 +59,8 @@ const category = {
 };
 database.insert('categories', category).then();*/
 // database.showAll('categories').then((th) => console.log(th));
-// database.findById('categories','59743f13e392ab1c148c64b0').then((f)=>console.log(f));
+// database.findById('categories','59743f13e392ab1c148c64b0')
+// .then((f)=>console.log(f));
 // database.update('test',{text:'a'},{text:'b'}).then((d)=>console.log(d));
 // database.showAll('users').then(u => console.log(u));
 // database.deleteAll('posts/Sport');
