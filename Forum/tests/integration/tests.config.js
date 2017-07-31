@@ -4,4 +4,6 @@ const connectionString = 'mongodb://localhost/test-db';
 
 const sessionSecret = 'tellus a secret';
 
-module.exports = { port, connectionString, sessionSecret };
+const bodyParserType = 'json';
+
+module.exports = { port, connectionString, sessionSecret, bodyParserType };

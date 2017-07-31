@@ -18,13 +18,18 @@ const init = (serverConfig) => {
 
     const connectionstring = serverConfig.connectionString;
     const sessionSecret = serverConfig.sessionSecret;
+    const bodyParserType = serverConfig.bodyParserType;
 
     app.use(express.static(__dirname + '../Forum'));
     app.set('views', __dirname + '/views');
     app.set('view engine', 'pug');
     app.use('/static', express.static(path.join(__dirname, './static')));
     app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
-    app.use(bodyParser.urlencoded({ extended: true }));
+    if (bodyParserType === 'url') {
+        app.use(bodyParser.urlencoded({ extended: true }));
+    } else {
+        app.use(bodyParser.json());
+    }
     app.use(cookieParser('secret'));
     app.use(session({
         secret: sessionSecret,
@@ -36,6 +41,12 @@ const init = (serverConfig) => {
     }));
     app.use(flash());
     const database = new Database(connectionstring);
+
+    /* const category = {
+        title: 'Other',
+        posts: [],
+    };
+    database.insert('categories', category);*/
 
     authConfig(app, database);
     posts(app, database);

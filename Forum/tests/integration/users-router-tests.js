@@ -1,6 +1,5 @@
 const { init } = require('../../app');
 const config = require('./tests.config');
-const noDbConfig = require('./test.config-nodb');
 const request = require('supertest');
 const { expect } = require('chai');
 
@@ -24,13 +23,38 @@ describe('/users', () => {
                         });
                 });
             });
+    });
+    describe('GET /:username/settings', () => {
+        const async = () => {
+            return Promise.resolve();
+        };
         async()
-        .then(() => require('../../app').init(noDbConfig))
+        .then(() => require('../../app').init(config))
             .then((app) => {
-                it('expect to return 404 when not connected to db', (done) => {
+                it('expect to return 404 when not authenticated', (done) => {
                     request(app)
-                        .get('/')
+                        .get('/users/user1/settings')
                         .expect(404)
+                        .end((err, res) => {
+                            if (err) {
+                                return done(err);
+                            }
+                            return done();
+                        });
+                });
+            });
+    });
+    describe('GET /:username/:id', () => {
+        const async = () => {
+            return Promise.resolve();
+        };
+        async()
+        .then(() => require('../../app').init(config))
+            .then((app) => {
+                it('expect to return 200 when there is this post', (done) => {
+                    request(app)
+                        .get('/users/user1/597f546b1b0d412a5807a7d0')
+                        .expect(200)
                         .end((err, res) => {
                             if (err) {
                                 return done(err);
