@@ -26,7 +26,7 @@ html(lang='en')
 
 	body
 		nav.navbar.fixed-top.navbar-toggleable-md.navbar-inverse.bg-inverse
-			button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarExample', aria-controls='navbarExample', aria-expanded='false', aria-label='Toggle navigation')
+			button#navbar-toggler.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarExample', aria-controls='navbarExample', aria-expanded='false', aria-label='Toggle navigation')
 				span.navbar-toggler-icon
 			.container
 				.wrapper
@@ -36,7 +36,7 @@ html(lang='en')
 					ul.navbar-nav.ml-auto
 						if user
 							li.nav-item.naveffect
-								a#user-profile-button.nav-link(href='/users/'+user.username)
+								a#nav-button-user.nav-link(href='/users/'+user.username)
 									span.blue(data-hover=user.username.substring(0, 25))=user.username.substring(0, 25)
 							//- li.nav-item.naveffect
 							//- 	a.nav-link(href='/users/settings')
@@ -53,7 +53,7 @@ html(lang='en')
 								span(data-hover='About') About
 						if user
 							li.nav-item.naveffect
-								a.nav-link#nav-button-user(href='/auth/logout')
+								a#nav-button-logout.nav-link(href='/auth/logout')
 									span(data-hover='Logout') Logout					
 	block body
 

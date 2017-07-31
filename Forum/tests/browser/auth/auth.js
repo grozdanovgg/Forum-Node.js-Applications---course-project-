@@ -14,87 +14,82 @@ describe('User authentication', () => {
 
     beforeEach(() => {
         driver = setupDriver('chrome');
+        driver.manage().window().maximize();
+        ui.setDriver(driver);
+        return driver.get(appUrl);
+    });
+    afterEach(() => {
+        return driver.quit();
     });
 
-    describe('Valid user registration', () => {
-        beforeEach((done) => {
-            Promise.resolve()
-                // @ts-ignore
-                .then(() => driver.get(appUrl))
-                .then(() => {
-                    return driver.findElement(webdriver.By.css('.navbar-toggler'));
-                })
-                .then((el) => {
-                    if (el) {
-                        el.click();
-                    }
-                })
-                .then(() => {
-                    return driver.findElement(
-                        webdriver.By.css('#nav-button-register')
-                    );
-                })
-                .then((btn) => {
-                    btn.click();
-                    done();
-                });
-        });
-        it('Expext to complete register process', (done) => {
-            const username = 'TestUser-1';
-            const password = '1234';
-            const email = 'tests@mail.com';
-            Promise.resolve()
-                .then(() => {
-                    return driver.findElement(webdriver.By.css('#username'));
-                })
-                .then((input) => {
-                    input.sendKeys(username);
-                })
-                .then(() => {
-                    return driver.findElement(webdriver.By.css('#email.input-xlarge'));
-                })
-                .then((input) => {
-                    input.sendKeys(email);
-                })
-                .then(() => {
-                    return driver.findElement(webdriver.By.css('#password.input-xlarge'));
-                })
-                .then((input) => {
-                    input.sendKeys(password);
-                })
-                .then(() => {
-                    return driver.findElement(webdriver.By.css('#password_confirm'));
-                })
-                .then((input) => {
-                    input.sendKeys(password);
-                })
-                .then(() => {
-                    return driver.findElement(
-                        webdriver.By.css('#register')
-                    );
-                })
-                .then((btn) => {
-                    btn.click();
-                    // done();
-                })
-                .then(() => {
-                    return driver.findElement(webdriver.By.css('.navbar-toggler'));
-                })
-                .then((el) => {
-                    if (el) {
-                        el.click();
-                    }
-                })
-                .then(() => {
-                    return driver.findElement(webdriver.By.css('#user-profile-button'));
-                })
-                .then((user) => {
-                    return user.getText();
-                })
-                .then((user) => {
-                    expect(user).to.equals(username.toUpperCase());
-                    done();
-                });
-        });
+    it('Expext to register user', (done) => {
+        const username = 'TestUser-1';
+        const password = '1234';
+        const email = 'tests@mail.com';
+        Promise.resolve()
+            .then(() => ui.click('#nav-button-register'))
+            .then(() => ui.setValue('#username', username))
+            .then(() => ui.setValue('#email.input-xlarge', email))
+            .then(() => ui.setValue('#password.input-xlarge', password))
+            .then(() => ui.setValue('#password_confirm', password))
+            .then(() => ui.click('#register-btn'))
+            .then(() => ui.getText('#nav-button-user span'))
+            .then((user) => {
+                expect(user).to.equals(username.toUpperCase());
+                done();
+            })
+            .catch((err) => console.log(err));
+    });
+    it('Expext to logout', (done) => {
+        Promise.resolve()
+            .then(() => ui.click('#nav-button-logout'))
+            .then(() => {
+                return ui.getText('.navbar-nav li:last-child a span');
+            })
+            .then((buttonText) => {
+                expect(buttonText).to.equals('ABOUT');
+                done();
+            })
+            .catch((err) => {
+                throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+            });
+    });
+    it('Expext to NOT ALLOW DUPLICATE user', (done) => {
+        const username = 'TestUser-1';
+        const password = '1234';
+        const email = 'tests@mail.com';
+        const errMsg = 'Username is taken';
+        Promise.resolve()
+            .then(() => ui.click('#nav-button-register'))
+            .then(() => ui.setValue('#username', username))
+            .then(() => ui.setValue('#email.input-xlarge', email))
+            .then(() => ui.setValue('#password.input-xlarge', password))
+            .then(() => ui.setValue('#password_confirm', password))
+            .then(() => ui.click('#register-btn'))
+            .then(() => ui.getText('#registering-error-message'))
+            .then((msg) => {
+                expect(msg).to.equals(errMsg);
+                done();
+            })
+            .catch((err) => {
+                throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+            });
+    });
+    it('Expext to login', (done) => {
+        const username = 'TestUser-1';
+        const password = '1234';
+        Promise.resolve()
+            .then(() => ui.click('#nav-button-login'))
+            .then(() => ui.setValue('#username-login-input', username))
+            .then(() => ui.setValue('#password-login-input', password))
+            .then(() => ui.click('#login-btn'))
+            .then(() => ui.getText('#nav-button-user span'))
+            .then((user) => {
+                expect(user).to.equals(username.toUpperCase());
+                done();
+            })
+            .catch((err) => {
+                throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+            });
     });
 });

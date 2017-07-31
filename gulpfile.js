@@ -7,7 +7,7 @@ const { MongoClient } = require('mongodb');
 const config = {
     connectionString: 'mongodb://localhost/items-db',
     port: 3002,
-
+    categories: ['animals', 'cars', 'clothing', 'man', 'school', 'space', 'sport', 'women', 'sex', 'movies', 'music', 'programming', 'work', 'other', 'games']
 }
 
 gulp.task('server-start', () => {
@@ -39,13 +39,13 @@ gulp.task('server-start', () => {
 gulp.task('server-stop', () => {
     return MongoClient.connect(config.connectionString)
         .then((db) => {
-            db.dropDatabase()
+            db.dropDatabase();
         })
 })
 
 // @ts-ignore
 gulp.task('tests:browser', ['server-start'], () => {
-    return gulp.src('./Forum/tests/browser/auth/auth.js')
+    return gulp.src('./Forum/tests/browser/**/*.js')
         .pipe(mocha({
             // reporter: 'nyan',
             timeout: 15000,

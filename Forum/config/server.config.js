@@ -8,4 +8,9 @@ const sessionSecret = 'tellus a secret';
 
 const bodyParserType = 'url';
 
-module.exports = { port, connectionString, sessionSecret, bodyParserType };
+const categories = ['animals', 'cars', 'clothing', 'man', 'school', 'space',
+    'sport', 'women', 'sex', 'movies', 'music',
+    'programming', 'work', 'other', 'games',
+];
+
+module.exports = { port, connectionString, sessionSecret, categories, bodyParserType };

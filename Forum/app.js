@@ -19,6 +19,7 @@ const init = (serverConfig) => {
     const connectionstring = serverConfig.connectionString;
     const sessionSecret = serverConfig.sessionSecret;
     const bodyParserType = serverConfig.bodyParserType;
+    const newCategories = serverConfig.categories;
 
     app.use(express.static(__dirname + '../Forum'));
     app.set('views', __dirname + '/views');
@@ -40,6 +41,7 @@ const init = (serverConfig) => {
         },
     }));
     app.use(flash());
+
     const database = new Database(connectionstring);
 
     /* const category = {
@@ -55,6 +57,18 @@ const init = (serverConfig) => {
     about(app);
     start(app, database);
 
+    database.showAll('categories')
+        .then((categories) => {
+            if (categories.length === 0) {
+                for (const category of newCategories) {
+                    database.insert('categories', {
+                        title: category,
+                        bio: '',
+                        posts: [],
+                    });
+                }
+            }
+        });
     return Promise.resolve(app);
 };
 
@@ -63,12 +77,8 @@ module.exports = {
 };
 
 // Tutorial for using database
-/* database.deleteAll('categories');
-const category = {
-    title: 'Other',
-    posts: [],
-};
-database.insert('categories', category).then();*/
+// database.deleteAll('categories');
+
 // database.showAll('categories').then((th) => console.log(th));
 // database.findById('categories','59743f13e392ab1c148c64b0')
 // .then((f)=>console.log(f));

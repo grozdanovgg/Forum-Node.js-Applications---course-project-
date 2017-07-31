@@ -4,7 +4,7 @@ block body
     .container
         br
         if message
-            h1.error-message=message
+            h1#registering-error-message.error-message=message
         form.form-horizontal(action='', method='POST')
             fieldset
                 #legend
@@ -36,5 +36,5 @@ block body
                 .control-group
                     // Button
                     .controls
-                        button#register.btn.btn-primary(type='submit', value='submit') Register
+                        button#register-btn.btn.btn-primary(type='submit', value='submit') Register
                 br

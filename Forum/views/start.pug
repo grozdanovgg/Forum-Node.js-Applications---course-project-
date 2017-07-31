@@ -59,7 +59,7 @@ block body
       .row.no-gutter
         - for (var i = 0; i < categories.length; ++i) {
           .col-lg-4.col-sm-6
-            a.portfolio-box(href=`/Posts/${categories[i].title}`)
+            a.portfolio-box(href=`/Posts/${categories[i].title}`, id=categories[i].title)
               img.img-responsive-home(src=`/static/images/categories/cropped/${categories[i].title}.jpg`, alt=`${categories[i].title}`)
               .portfolio-box-caption
                 .portfolio-box-caption-content
