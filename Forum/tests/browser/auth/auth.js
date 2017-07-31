@@ -11,6 +11,10 @@ describe('User authentication', () => {
     // let driver = new webdriver.Builder().build();
 
     const appUrl = 'http://localhost:3002';
+    const username = 'TestUser-1';
+    const password = '1234';
+    const email = 'tests@mail.com';
+    const errMsg = 'Username is taken';
 
     beforeEach(() => {
         driver = setupDriver('chrome');
@@ -18,14 +22,11 @@ describe('User authentication', () => {
         ui.setDriver(driver);
         return driver.get(appUrl);
     });
-    afterEach(() => {
-        return driver.quit();
-    });
+    // afterEach(() => {
+    //     return driver.quit();
+    // });
 
     it('Expext to register user', (done) => {
-        const username = 'TestUser-1';
-        const password = '1234';
-        const email = 'tests@mail.com';
         Promise.resolve()
             .then(() => ui.click('#nav-button-register'))
             .then(() => ui.setValue('#username', username))
@@ -55,10 +56,6 @@ describe('User authentication', () => {
             });
     });
     it('Expext to NOT ALLOW DUPLICATE user', (done) => {
-        const username = 'TestUser-1';
-        const password = '1234';
-        const email = 'tests@mail.com';
-        const errMsg = 'Username is taken';
         Promise.resolve()
             .then(() => ui.click('#nav-button-register'))
             .then(() => ui.setValue('#username', username))
@@ -76,8 +73,6 @@ describe('User authentication', () => {
             });
     });
     it('Expext to login', (done) => {
-        const username = 'TestUser-1';
-        const password = '1234';
         Promise.resolve()
             .then(() => ui.click('#nav-button-login'))
             .then(() => ui.setValue('#username-login-input', username))
