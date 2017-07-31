@@ -21,7 +21,7 @@ describe('Paging tests', () => {
             expect(result).to.eq(1);
         });
         it('should throw when page is not number', () => {
-            //Act
+            // Act
             const result = pageHandler.choosePage('notNumber');
 
             // Assert
@@ -29,15 +29,15 @@ describe('Paging tests', () => {
         });
     });
 
-    describe('PageHandler.handle()', () => {        
-        let res = {
+    describe('PageHandler.handle()', () => {
+        const res = {
             redirect: () => {
                 return 'send was called';
-            }
+            },
         };
 
         it('should return correct result when there are at least 3 pages.', () => {
-            //Arrange
+            // Arrange
             const page = 1;
             const size = 2;
             const collection = [1, 2, 3, 4, 5];
@@ -52,7 +52,7 @@ describe('Paging tests', () => {
         });
 
         it('should return correct result when there are at least 3 pages.', () => {
-            //Arrange
+            // Arrange
             const page = 2;
             const size = 2;
             const collection = [1, 2, 3, 4, 5];
@@ -67,7 +67,7 @@ describe('Paging tests', () => {
         });
 
         it('should return correct result when there are at least 3 pages.', () => {
-            //Arrange
+            // Arrange
             const page = 3;
             const size = 2;
             const collection = [1, 2, 3, 4, 5];
@@ -82,7 +82,7 @@ describe('Paging tests', () => {
         });
 
         it('should return correct result when there is no record in collections', () => {
-            //Arrange
+            // Arrange
             const page = 1;
             const size = 2;
             const collection = [];
@@ -97,7 +97,7 @@ describe('Paging tests', () => {
         });
 
         it('should return correct result when there are 2 pages.', () => {
-            //Arrange
+            // Arrange
             const page = 1;
             const size = 2;
             const collection = [1, 2, 3, 4];
@@ -112,7 +112,7 @@ describe('Paging tests', () => {
         });
 
         it('should return correct result when there is 1 page.', () => {
-            //Arrange
+            // Arrange
             const page = 1;
             const size = 2;
             const collection = [1, 2];
@@ -127,7 +127,7 @@ describe('Paging tests', () => {
         });
 
         it('should throw when page is lower than 1', () => {
-            //Arrange
+            // Arrange
             const page = 0;
             const size = 2;
             const collection = [];
@@ -139,5 +139,4 @@ describe('Paging tests', () => {
             expect(result.error).to.deep.eq('Page is above / bellow range.');
         });
     });
-
 });
