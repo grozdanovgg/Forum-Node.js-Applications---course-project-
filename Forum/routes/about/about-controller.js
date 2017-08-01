@@ -1,6 +1,6 @@
 const controller = {
     showAbout(req, res) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         res.render('about', { user });
     },
 };

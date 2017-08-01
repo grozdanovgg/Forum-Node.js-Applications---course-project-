@@ -1,11 +1,6 @@
 const controller = {
     showHome(req, res, app, db) {
-        let user = req.user;
-        if (user && !app.locals.currentUser) {
-            app.locals.currentUser = user;
-        } else {
-            user = req.app.locals.currentUser;
-        }
+        const user = req.user;
         db.showAll('categories')
             .then((categories) => {
                 res.render('start', {

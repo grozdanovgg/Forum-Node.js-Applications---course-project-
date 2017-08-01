@@ -3,7 +3,7 @@ const controller = {
         return res.render('login', { message: req.flash('error') });
     },
     showRegister(req, res) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         if (user) {
             // const message = 'You are allready signed in.';
             res.render('register', { message: req.flash('error') });
@@ -17,12 +17,7 @@ const controller = {
         res.redirect('/');
     },
     pictureSettings(req, res, app) {
-        let user = req.user;
-        if (user && !app.locals.currentUser) {
-            app.locals.currentUser = user;
-        } else {
-            user = req.app.locals.currentUser;
-        }
+        const user = req.user;
         if (user) {
             res.render('picture', { user });
         } else {
@@ -31,7 +26,7 @@ const controller = {
         }
     },
     changePicture(req, res, db) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         if (!user) {
             res.redirect('/auth/login');
         }

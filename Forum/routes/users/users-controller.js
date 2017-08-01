@@ -1,6 +1,6 @@
 const controller = {
     showUser(req, res, db) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         const username = req.params.username;
         db.find('users', { username: username }).then((users) => {
                 const foundUser = users[0];
@@ -33,7 +33,7 @@ const controller = {
     },
 
     showUserSettings(req, res, db) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         // if (!user) {
         //     const message = 'User is not logged in.';
         //     return res.status(404).render('404', { user, message });
@@ -54,7 +54,7 @@ const controller = {
             });
     },
     showUserPost(req, res, db) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         const id = req.params.id;
         const username = req.params.username;
         db.find('users', { username }).then((u) => {
@@ -69,7 +69,7 @@ const controller = {
             });
     },
     createUserComment(req, res, db) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         if (!user) {
             res.redirect('/auth/login');
         }

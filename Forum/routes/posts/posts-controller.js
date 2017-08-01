@@ -3,7 +3,7 @@ const pageHandler = require('../../models/paging');
 
 const controller = {
     showPosts(req, res, db) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         const category = req.params.category;
 
         const page = pageHandler
@@ -45,7 +45,7 @@ const controller = {
     createPost(req, res, db, registeredUser) {
         let user = null;
         if (!registeredUser) {
-            user = req.app.locals.currentUser;
+            user = req.user;
         } else {
             user = registeredUser;
         }
@@ -118,7 +118,7 @@ const controller = {
             });
     },
     showPost(req, res, db) {
-        const user = req.app.locals.currentUser;
+        const user = req.user;
         const category = req.params.category;
         const id = req.params.id;
         db.findById('posts/' + category, id).then((posts) => {
@@ -133,7 +133,7 @@ const controller = {
     createComment(req, res, db, registeredUser) {
         let user = null;
         if (!registeredUser) {
-            user = req.app.locals.currentUser;
+            user = req.user;
         } else {
             user = registeredUser;
         }
