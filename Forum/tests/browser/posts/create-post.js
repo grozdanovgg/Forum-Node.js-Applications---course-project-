@@ -17,7 +17,7 @@ describe('Posts', () => {
     const appUrl = 'http://localhost:3002';
     const username = 'TestUser-2';
     const password = '1234';
-    const email = 'tests@mail.com';
+    const email = 'tests2@mail.com';
     const newPostTitle = 'Cats are GODS';
     const newPostText = 'Does anyone dissagree?';
     const newComment = 'Oh.. turtles are nice too';
@@ -36,7 +36,7 @@ describe('Posts', () => {
         return driver.quit();
     });
     describe('Login and create new posts', () => {
-        it('Expect to login', (done) => {
+        it('Expect to register', (done) => {
             Promise.resolve()
                 .then(() => ui.click('#nav-button-register'))
                 .then(() => ui.setValue('#username', username))
@@ -58,6 +58,11 @@ describe('Posts', () => {
         });
         it('Expect to write new post in Animals category', (done) => {
             Promise.resolve()
+                .then(() => ui.click('#nav-button-login'))
+                .then(() => ui.setValue('#username-login-input', username))
+                .then(() => ui.setValue('#password-login-input', password))
+                .then(() => ui.click('#login-btn'))
+                .then(() => ui.getText('#nav-button-user span'))
                 .then(() => ui.click('#animals'))
                 .then(() => {
                     ui.setValue(
@@ -90,6 +95,11 @@ describe('Posts', () => {
         it('Expect to write comment on the last post in Animals category',
             (done) => {
                 Promise.resolve()
+                    .then(() => ui.click('#nav-button-login'))
+                    .then(() => ui.setValue('#username-login-input', username))
+                    .then(() => ui.setValue('#password-login-input', password))
+                    .then(() => ui.click('#login-btn'))
+                    .then(() => ui.getText('#nav-button-user span'))
                     .then(() => ui.click('#animals'))
                     .then(() => ui.click('.post-title'))
                     .then(() => ui.setValue('form input', newComment))
@@ -107,21 +117,5 @@ describe('Posts', () => {
                         );
                     });
             });
-        it('Expext to logout', (done) => {
-            Promise.resolve()
-                .then(() => ui.click('#nav-button-logout'))
-                .then(() => {
-                    return ui.getText('.navbar-nav li:last-child a span');
-                })
-                .then((buttonText) => {
-                    expect(buttonText).to.equals('ABOUT');
-                    done();
-                })
-                .catch((err) => {
-                    throw new Error(
-                        'Promise was unexpectedly fulfilled. Result: ' + err
-                    );
-                });
-        });
     });
 });

@@ -21,7 +21,7 @@ describe('Home', () => {
     const appUrl = 'http://localhost:3002';
     const username = 'TestUser-3';
     const password = '1234';
-    const email = 'tests@mail.com';
+    const email = 'tests3@mail.com';
     const newChatMsg = 'Heey';
 
     beforeEach(() => {
@@ -30,9 +30,6 @@ describe('Home', () => {
         ui.setDriver(driver);
         return driver.get(appUrl);
     });
-    // after(() => {
-    //     ui.click('#nav-button-logout');
-    // });
     afterEach(() => {
         return driver.quit();
     });
@@ -73,7 +70,7 @@ describe('Home', () => {
         }
     });
     describe('Chat functionality', () => {
-        it('Expect log in', (done) => {
+        it('Expect to register new user', (done) => {
             Promise.resolve()
                 .then(() => ui.click('#nav-button-register'))
                 .then(() => ui.setValue('#username', username))
@@ -93,8 +90,14 @@ describe('Home', () => {
                     );
                 });
         });
+
         it('Expect to be able to chat, when logged in', (done) => {
             Promise.resolve()
+                .then(() => ui.click('#nav-button-login'))
+                .then(() => ui.setValue('#username-login-input', username))
+                .then(() => ui.setValue('#password-login-input', password))
+                .then(() => ui.click('#login-btn'))
+                .then(() => ui.getText('#nav-button-user span'))
                 .then(() => ui.setValue('#m', newChatMsg))
                 .then(() => ui.click('form button'))
                 .then(() => {
@@ -114,6 +117,11 @@ describe('Home', () => {
         });
         it('Expext to logout', (done) => {
             Promise.resolve()
+                .then(() => ui.click('#nav-button-login'))
+                .then(() => ui.setValue('#username-login-input', username))
+                .then(() => ui.setValue('#password-login-input', password))
+                .then(() => ui.click('#login-btn'))
+                .then(() => ui.getText('#nav-button-user span'))
                 .then(() => ui.click('#nav-button-logout'))
                 .then(() => {
                     return ui.getText('.navbar-nav li:last-child a span');

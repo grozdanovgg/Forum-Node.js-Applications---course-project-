@@ -15,18 +15,15 @@ describe('User authentication', () => {
     const appUrl = 'http://localhost:3002';
     const username = 'TestUser-1';
     const password = '1234';
-    const email = 'tests@mail.com';
+    const email = 'tests1@mail.com';
     const errMsg = 'Username is taken';
-
     beforeEach(() => {
         driver = setupDriver('chrome');
         driver.manage().window().maximize();
         ui.setDriver(driver);
         return driver.get(appUrl);
     });
-    // after(() => {
-    //     ui.click('#nav-button-logout');
-    // });
+
     afterEach(() => {
         return driver.quit();
     });
@@ -45,22 +42,6 @@ describe('User authentication', () => {
                     done();
                 })
                 .catch((err) => console.log(err));
-        });
-        it('Expext to logout', (done) => {
-            Promise.resolve()
-                .then(() => ui.click('#nav-button-logout'))
-                .then(() => {
-                    return ui.getText('.navbar-nav li:last-child a span');
-                })
-                .then((buttonText) => {
-                    expect(buttonText).to.equals('ABOUT');
-                    done();
-                })
-                .catch((err) => {
-                    throw new Error(
-                        'Promise was unexpectedly fulfilled. Result: ' + err
-                    );
-                });
         });
         it('Expext to NOT ALLOW DUPLICATE user', (done) => {
             Promise.resolve()
@@ -100,6 +81,11 @@ describe('User authentication', () => {
         });
         it('Expext to open user profile settings', (done) => {
             Promise.resolve()
+                .then(() => ui.click('#nav-button-login'))
+                .then(() => ui.setValue('#username-login-input', username))
+                .then(() => ui.setValue('#password-login-input', password))
+                .then(() => ui.click('#login-btn'))
+                .then(() => ui.getText('#nav-button-user span'))
                 .then(() => ui.click('#nav-button-user'))
                 .then(() => ui.click('.btn-success'))
                 .then(() => {
@@ -115,8 +101,13 @@ describe('User authentication', () => {
                     );
                 });
         });
-        it('Expext to logout again', (done) => {
+        it('Expext to logout', (done) => {
             Promise.resolve()
+                .then(() => ui.click('#nav-button-login'))
+                .then(() => ui.setValue('#username-login-input', username))
+                .then(() => ui.setValue('#password-login-input', password))
+                .then(() => ui.click('#login-btn'))
+                .then(() => ui.getText('#nav-button-user span'))
                 .then(() => ui.click('#nav-button-logout'))
                 .then(() => {
                     return ui.getText('.navbar-nav li:last-child a span');
