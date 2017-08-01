@@ -65,7 +65,8 @@ block body
                 .portfolio-box-caption-content
                   .project-category.text-faded
                     | Category
-                  .project-name= categories[i].title 
+                  .project-name
+                    h1= categories[i].title 
         - }
   if !user
     section#enter-forum
