@@ -50,9 +50,9 @@ const init = (serverConfig) => {
         posts: [],
     };
     database.insert('categories', category);*/
-    authConfig(app, database, registratedUser);
-    posts(app, database);
-    users(app, database);
+    authConfig(app, database);
+    posts(app, database, registratedUser);
+    users(app, database, registratedUser);
     auth(app, database);
     about(app);
     start(app, database);

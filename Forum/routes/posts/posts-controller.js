@@ -42,8 +42,13 @@ const controller = {
                 res.render('404', { user, message });
             });
     },
-    createPost(req, res, db) {
-        const user = req.app.locals.currentUser;
+    createPost(req, res, db, registeredUser) {
+        let user = null;
+        if (!registeredUser) {
+            user = req.app.locals.currentUser;
+        } else {
+            user = registeredUser;
+        }
         if (!user) {
             res.redirect('/auth/login');
         }
@@ -125,10 +130,15 @@ const controller = {
             }
         });
     },
-    createComment(req, res, db) {
-        const user = req.app.locals.currentUser;
+    createComment(req, res, db, registeredUser) {
+        let user = null;
+        if (!registeredUser) {
+            user = req.app.locals.currentUser;
+        } else {
+            user = registeredUser;
+        }
         if (!user) {
-            res.redirect('/');
+            res.redirect('/auth/login');
         }
         const category = req.params.category;
         const id = req.params.id;

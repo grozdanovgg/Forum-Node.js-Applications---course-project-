@@ -7,7 +7,7 @@ const sessionSecret = 'tellus a secret';
 const bodyParserType = 'json';
 
 const user = {
-    username: 'user2',
+    username: 'user1',
     posts: [{ title: 'post1', post: 'post1', comments: [] }],
 };
 
