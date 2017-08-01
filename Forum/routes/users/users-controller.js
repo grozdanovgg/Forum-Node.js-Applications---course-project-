@@ -39,7 +39,8 @@ const controller = {
         //     return res.status(404).render('404', { user, message });
         // }
         const username = req.params.username;
-        return db.find('users', { username: username }).then((users) => {
+        return db.find('users', { username: username })
+            .then((users) => {
                 const foundUser = users[0];
                 if (!foundUser) {
                     const message = 'There was a problem finding the user.';
