@@ -6,7 +6,7 @@ This document describes the teamwork assignment for Telerik Academy students in 
 
 ## Project Description
 
-The project is a classic Node.js web application - forum, fore basically everything.
+The project is a classic Node.js web application - forum, for basically everything.
 The application is module based and object-oriented. It has the following structure:
 - Home page
 - Login page
