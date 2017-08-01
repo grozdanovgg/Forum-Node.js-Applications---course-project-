@@ -37,7 +37,7 @@ describe('Home', () => {
         return driver.quit();
     });
     describe('Home routes correct redirect', () => {
-        it('Expect Lets go button to rediderct to Register form', (done) => {
+        it('Expect "Lets go button" to rediderct to Register form', (done) => {
             Promise.resolve()
                 .then(() => ui.click('#lets-go-register-btn'))
                 .then(() => {
