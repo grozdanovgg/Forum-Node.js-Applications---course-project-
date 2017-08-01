@@ -36,6 +36,12 @@ describe('/auth', () => {
             it('GET /logout expect to return 200', (done) => {
                 request(app)
                     // @ts-ignore
+                    .get('/')
+                    .post('/auth/login')
+                    .send({
+                        username: 'user1',
+                        password: '0000',
+                    })
                     .set('Accept', 'application/json')
                     .get('/auth/logout')
                     .expect(302)

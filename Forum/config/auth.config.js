@@ -15,7 +15,7 @@ function validateUsername(username) {
     return re.test(username);
 }
 
-const configAuth = (app, database) => {
+const configAuth = (app, database, registeredUser) => {
     passport.use(new Strategy({
             passReqToCallback: true,
         },

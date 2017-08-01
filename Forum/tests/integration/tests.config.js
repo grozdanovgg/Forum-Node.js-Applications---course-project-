@@ -6,4 +6,15 @@ const sessionSecret = 'tellus a secret';
 
 const bodyParserType = 'json';
 
-module.exports = { port, connectionString, sessionSecret, bodyParserType };
+const user = {
+    username: 'user1',
+    posts: [{ title: 'post1', post: 'post1', comments: [] }],
+};
+
+module.exports = {
+    port,
+    connectionString,
+    sessionSecret,
+    bodyParserType,
+    user,
+};
