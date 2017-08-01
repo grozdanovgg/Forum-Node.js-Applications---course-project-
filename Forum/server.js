@@ -9,7 +9,7 @@ async()
 .then(() => require('./app').init(config))
     .then((app) => {
         const port = process.env.PORT || config.port;
-        return app.listen(config.port, () =>
+        return app.listen(port, () =>
             console.log(`Magic is running at :${port}`));
     })
     .then((server) => {

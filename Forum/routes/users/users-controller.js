@@ -34,25 +34,25 @@ const controller = {
 
     showUserSettings(req, res, db) {
         const user = req.app.locals.currentUser;
-        if (!user) {
-            const message = 'User is not logged in.';
-            return res.status(404).render('404', { user, message });
-        }
+        // if (!user) {
+        //     const message = 'User is not logged in.';
+        //     return res.status(404).render('404', { user, message });
+        // }
         const username = req.params.username;
-        db.find('users', { username: username }).then((users) => {
+        db.find('users', { username: username })
+            .then((users) => {
                 const foundUser = users[0];
                 if (!foundUser) {
                     const message = 'There was a problem finding the user.';
                     return res.status(404).render('404', { user, message });
                 }
-
                 return res.render('settings', { user });
             })
             .catch(() => {
                 const message = 'There was a problem finding the user.';
                 return res.status(404).render('404', { user, message });
             });
-        return res.status(404).render('404', { user });
+        // return res.status(404).render('404', { user });
     },
     showUserPost(req, res, db) {
         const user = req.app.locals.currentUser;

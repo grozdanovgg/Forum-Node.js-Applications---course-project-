@@ -1,6 +1,6 @@
 {
     "name": "tellus",
-    "version": "1.0.0",
+    "version": "2.2.0",
     "main": "server.js",
     "license": "MIT",
     "author": "Express 8 Team (Martin Kamenov & Georgi Grozdanov)",

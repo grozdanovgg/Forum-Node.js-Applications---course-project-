@@ -98,6 +98,23 @@ describe('User authentication', () => {
                     );
                 });
         });
+        it('Expext to open user profile settings', (done) => {
+            Promise.resolve()
+                .then(() => ui.click('#nav-button-user'))
+                .then(() => ui.click('.btn-success'))
+                .then(() => {
+                    return ui.getText('.btn-success');
+                })
+                .then((buttonText) => {
+                    expect(buttonText).to.equals('Change Picture');
+                    done();
+                })
+                .catch((err) => {
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
+                });
+        });
         it('Expext to logout again', (done) => {
             Promise.resolve()
                 .then(() => ui.click('#nav-button-logout'))
