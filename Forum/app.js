@@ -20,6 +20,7 @@ const init = (serverConfig) => {
     const sessionSecret = serverConfig.sessionSecret;
     const bodyParserType = serverConfig.bodyParserType;
     const newCategories = serverConfig.categories;
+    const registratedUser = serverConfig.user;
 
     app.use(express.static(__dirname + '../Forum'));
     app.set('views', __dirname + '/views');
@@ -49,8 +50,7 @@ const init = (serverConfig) => {
         posts: [],
     };
     database.insert('categories', category);*/
-
-    authConfig(app, database);
+    authConfig(app, database, registratedUser);
     posts(app, database);
     users(app, database);
     auth(app, database);

@@ -15,7 +15,7 @@ function validateUsername(username) {
     return re.test(username);
 }
 
-const configAuth = (app, database) => {
+const configAuth = (app, database, registeredUser) => {
     passport.use(new Strategy({
             passReqToCallback: true,
         },
@@ -117,16 +117,20 @@ const configAuth = (app, database) => {
     });
 
     passport.deserializeUser((id, done) => {
-        database.findById('users', id)
-            .then((users) => {
-                if (users.length < 1) {
-                    return done('No such user found.----');
-                } else if (users.length > 1) {
-                    return done('There is more than one user with this id');
-                }
-                return done(null, users[0]);
-            })
-            .catch((ex) => done(ex));
+        if (!registeredUser) {
+            database.findById('users', id)
+                .then((users) => {
+                    if (users.length < 1) {
+                        return done('No such user found.----');
+                    } else if (users.length > 1) {
+                        return done('There is more than one user with this id');
+                    }
+                    return done(null, users[0]);
+                })
+                .catch((ex) => done(ex));
+        } else {
+            done(null, registeredUser);
+        }
     });
 };
 
