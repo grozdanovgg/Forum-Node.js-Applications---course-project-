@@ -38,7 +38,7 @@ const init = (serverConfig) => {
         resave: false,
         saveUninitialized: true,
         cookie: {
-            maxAge: 60000,
+            maxAge: 600000000,
         },
     }));
     app.use(flash());
@@ -52,7 +52,7 @@ const init = (serverConfig) => {
     database.insert('categories', category);*/
     authConfig(app, database);
     posts(app, database, registratedUser);
-    users(app, database, registratedUser);
+    users(app, database);
     auth(app, database);
     about(app);
     start(app, database);
