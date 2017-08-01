@@ -4,7 +4,6 @@ const controller = {
     showPosts(req, res, db) {
         const user = req.app.locals.currentUser;
         const category = req.params.category;
-        // console.log(category);
 
         const page = pageHandler
             .choosePage(req.query.page);
@@ -37,8 +36,8 @@ const controller = {
                     user,
                 });
             })
-            .catch(() => {
-                const message = 'There was a problem finding the posts.';
+            .catch((err) => {
+                const message = 'There was a problem finding the posts: ' + err;
                 res.render('404', { user, message });
             });
     },
@@ -55,7 +54,6 @@ const controller = {
         if (page.error) {
             res.render('404', { message: page.error });
         }
-        console.log(user.pictureName);
         const newPost = {
             title: title,
             post: post,
@@ -79,10 +77,12 @@ const controller = {
                 const showPages = pagingResult.navigationNumbers;
 
                 const pagesNum = pagingResult.numberOfPages;
-
-                const id = posts[posts.length - 1]._id;
-
-                newPost[id] = id;
+                if (!posts[posts.length - 1]) {
+                    newPost['0'] = '0';
+                } else {
+                    const id = posts[posts.length - 1]._id;
+                    newPost[id] = id;
+                }
 
                 res.render('showposts', {
                     category,
@@ -95,16 +95,19 @@ const controller = {
                 db.find('users', { username: user.username })
                     .then((users) => {
                         const changingUser = users[0];
-                        console.log(changingUser);
                         changingUser.posts.push(newPost);
                         db.update('users', {
                                 username: user.username,
                             },
                             changingUser);
+                    })
+                    .catch((err) => {
+                        const message = 'There was a problem addint the post to the user posts: ' + err;
+                        res.render('404', { user, message });
                     });
             })
-            .catch(() => {
-                const message = 'There was a problem inserting the post.';
+            .catch((err) => {
+                const message = 'There was a problem creating the post: ' + err;
                 res.render('404', { user, message });
             });
     },
@@ -113,7 +116,6 @@ const controller = {
         const category = req.params.category;
         const id = req.params.id;
         db.findById('posts/' + category, id).then((posts) => {
-            // console.log(posts);
             if (posts.length !== 1) {
                 const message = 'There was a problem finding the post.';
                 res.render('404', { user, message });
@@ -167,8 +169,8 @@ const controller = {
                             });
                     });
             })
-            .catch(() => {
-                const message = 'There was a problem finding the post.';
+            .catch((err) => {
+                const message = 'There was a problem finding the post: ' + err;
                 res.render('404', { user, message });
             });
     },

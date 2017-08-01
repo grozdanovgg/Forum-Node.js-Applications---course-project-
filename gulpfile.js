@@ -11,7 +11,8 @@ const config = {
     categories: ['animals', 'cars', 'clothing', 'man', 'school', 'space', 'sport', 'women', 'sex', 'movies', 'music', 'programming', 'work', 'other', 'games']
 }
 
-gulp.task('server-start', () => {
+// @ts-ignore
+gulp.task('server-start', ['server-stop'], () => {
     return Promise.resolve()
         .then(() => require('./Forum/app').init(config))
         .then((app) => {
@@ -46,10 +47,10 @@ gulp.task('server-stop', () => {
 
 // @ts-ignore
 gulp.task('tests:browser', ['server-start'], () => {
-    return gulp.src('./Forum/tests/browser/auth/auth.js')
+    return gulp.src('./Forum/tests/browser/**/*.js')
         .pipe(mocha({
             // reporter: 'nyan',
-            timeout: 15000,
+            timeout: 10000,
         }))
         .once('end', () => {
             // @ts-ignore

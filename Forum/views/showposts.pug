@@ -23,7 +23,7 @@ block body
                         .control-group
                             // Button
                             .controls
-                                button.btn.btn-success(type='submit', value='submit') Add Post
+                                button#post-button.btn.btn-success(type='submit', value='submit') Add Post
                 br
             // /.row
             hr
@@ -31,16 +31,16 @@ block body
         each post in showposts
             // Project One
             .row
-                .col-md-7
+                .col-md-3
                     a(href='/users/'+post.author)
+                        h5=post.author    
                         if post.img
-                            img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/${post.img}`, alt='', height="200" width="200")
+                            img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/${post.img}`, alt='', height="150" width="150")
                         else
-                            img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/default.jpg`, alt='', height="200" width="200")
-                .col-md-5
-                    h3=post.title
-                    p=post.author
-                    a.btn.btn-primary(href='/posts/'+category+'/'+post._id) View Post
+                            img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/default.jpg`, alt='', height="150" width="150")
+                a.col-md-5.post-item(href='/posts/'+category+'/'+post._id)
+                    h3.post-title=post.title
+                    //- a.btn.btn-primary(href='/posts/'+category+'/'+post._id) View Post
             // /.row
             hr
         

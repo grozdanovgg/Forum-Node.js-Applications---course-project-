@@ -10,14 +10,17 @@ block body
         //small Secondary Text
         if isMine
             a.btn.btn-success(href='/users/'+user.username+'/settings') Edit Profile
+        h2
+            |User posts:
+        hr
         each post in posts
             h3=Posts
             // Project One
             .row
-                .col-md-5
+                a.col-md-5(href='/users/'+foundUser.username+'/'+post._id)
                     h3=post.title
-                    p=post.author
-                    a.btn.btn-primary(href='/users/'+foundUser.username+'/'+post._id) View Post
+                    //- p=post.author
+                    //- a.btn.btn-primary(href='/users/'+foundUser.username+'/'+post._id) View Post
             // /.row
             hr
         // /.row

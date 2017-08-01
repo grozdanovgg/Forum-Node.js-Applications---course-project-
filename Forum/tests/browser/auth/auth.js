@@ -22,69 +22,87 @@ describe('User authentication', () => {
         ui.setDriver(driver);
         return driver.get(appUrl);
     });
-    // afterEach(() => {
-    //     return driver.quit();
+    // after(() => {
+    //     ui.click('#nav-button-logout');
     // });
-
-    it('Expext to register user', (done) => {
-        Promise.resolve()
-            .then(() => ui.click('#nav-button-register'))
-            .then(() => ui.setValue('#username', username))
-            .then(() => ui.setValue('#email.input-xlarge', email))
-            .then(() => ui.setValue('#password.input-xlarge', password))
-            .then(() => ui.setValue('#password_confirm', password))
-            .then(() => ui.click('#register-btn'))
-            .then(() => ui.getText('#nav-button-user span'))
-            .then((user) => {
-                expect(user).to.equals(username.toUpperCase());
-                done();
-            })
-            .catch((err) => console.log(err));
+    afterEach(() => {
+        return driver.quit();
     });
-    it('Expext to logout', (done) => {
-        Promise.resolve()
-            .then(() => ui.click('#nav-button-logout'))
-            .then(() => {
-                return ui.getText('.navbar-nav li:last-child a span');
-            })
-            .then((buttonText) => {
-                expect(buttonText).to.equals('ABOUT');
-                done();
-            })
-            .catch((err) => {
-                throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
-            });
-    });
-    it('Expext to NOT ALLOW DUPLICATE user', (done) => {
-        Promise.resolve()
-            .then(() => ui.click('#nav-button-register'))
-            .then(() => ui.setValue('#username', username))
-            .then(() => ui.setValue('#email.input-xlarge', email))
-            .then(() => ui.setValue('#password.input-xlarge', password))
-            .then(() => ui.setValue('#password_confirm', password))
-            .then(() => ui.click('#register-btn'))
-            .then(() => ui.getText('#registering-error-message'))
-            .then((msg) => {
-                expect(msg).to.equals(errMsg);
-                done();
-            })
-            .catch((err) => {
-                throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
-            });
-    });
-    it('Expext to login', (done) => {
-        Promise.resolve()
-            .then(() => ui.click('#nav-button-login'))
-            .then(() => ui.setValue('#username-login-input', username))
-            .then(() => ui.setValue('#password-login-input', password))
-            .then(() => ui.click('#login-btn'))
-            .then(() => ui.getText('#nav-button-user span'))
-            .then((user) => {
-                expect(user).to.equals(username.toUpperCase());
-                done();
-            })
-            .catch((err) => {
-                throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
-            });
+    describe('User authentication methods', () => {
+        it('Expext to register user', (done) => {
+            Promise.resolve()
+                .then(() => ui.click('#nav-button-register'))
+                .then(() => ui.setValue('#username', username))
+                .then(() => ui.setValue('#email.input-xlarge', email))
+                .then(() => ui.setValue('#password.input-xlarge', password))
+                .then(() => ui.setValue('#password_confirm', password))
+                .then(() => ui.click('#register-btn'))
+                .then(() => ui.getText('#nav-button-user span'))
+                .then((user) => {
+                    expect(user).to.equals(username.toUpperCase());
+                    done();
+                })
+                .catch((err) => console.log(err));
+        });
+        it('Expext to logout', (done) => {
+            Promise.resolve()
+                .then(() => ui.click('#nav-button-logout'))
+                .then(() => {
+                    return ui.getText('.navbar-nav li:last-child a span');
+                })
+                .then((buttonText) => {
+                    expect(buttonText).to.equals('ABOUT');
+                    done();
+                })
+                .catch((err) => {
+                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                });
+        });
+        it('Expext to NOT ALLOW DUPLICATE user', (done) => {
+            Promise.resolve()
+                .then(() => ui.click('#nav-button-register'))
+                .then(() => ui.setValue('#username', username))
+                .then(() => ui.setValue('#email.input-xlarge', email))
+                .then(() => ui.setValue('#password.input-xlarge', password))
+                .then(() => ui.setValue('#password_confirm', password))
+                .then(() => ui.click('#register-btn'))
+                .then(() => ui.getText('#registering-error-message'))
+                .then((msg) => {
+                    expect(msg).to.equals(errMsg);
+                    done();
+                })
+                .catch((err) => {
+                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                });
+        });
+        it('Expext to login', (done) => {
+            Promise.resolve()
+                .then(() => ui.click('#nav-button-login'))
+                .then(() => ui.setValue('#username-login-input', username))
+                .then(() => ui.setValue('#password-login-input', password))
+                .then(() => ui.click('#login-btn'))
+                .then(() => ui.getText('#nav-button-user span'))
+                .then((user) => {
+                    expect(user).to.equals(username.toUpperCase());
+                    done();
+                })
+                .catch((err) => {
+                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                });
+        });
+        it('Expext to logout again', (done) => {
+            Promise.resolve()
+                .then(() => ui.click('#nav-button-logout'))
+                .then(() => {
+                    return ui.getText('.navbar-nav li:last-child a span');
+                })
+                .then((buttonText) => {
+                    expect(buttonText).to.equals('ABOUT');
+                    done();
+                })
+                .catch((err) => {
+                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                });
+        });
     });
 });

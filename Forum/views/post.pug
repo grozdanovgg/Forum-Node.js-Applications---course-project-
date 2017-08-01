@@ -39,7 +39,7 @@ block body
                         img.img-fluid.rounded.mb-3.mb-md-0(src=`/static/images/profile/default.jpg`, alt='', height="50" width="50")
                     a(href="/users/"+comment.author)
                         h3=comment.author
-                    h4=comment.text
+                    h4.comment-text=comment.text
                     p=comment.date
             // /.row
             hr
