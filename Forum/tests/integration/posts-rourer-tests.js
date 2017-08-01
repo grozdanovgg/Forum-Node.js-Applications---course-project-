@@ -51,7 +51,7 @@ describe('/posts', () => {
         async()
         .then(() => require('../../app').init(config))
             .then((app) => {
-                it('expect to return 200 when connected to db', (done) => {
+                it('expect to return 302 and redirect to same page', (done) => {
                     request(app)
                         .post('/posts/Other')
                         .send({
@@ -59,7 +59,7 @@ describe('/posts', () => {
                             post: 'the body of post 5',
                         })
                         .set('Accept', 'application/json')
-                        .expect(200)
+                        .expect(302)
                         .end((err, res) => {
                             if (err) {
                                 return done(err);

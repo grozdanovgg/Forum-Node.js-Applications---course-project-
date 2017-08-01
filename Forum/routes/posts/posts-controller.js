@@ -90,22 +90,15 @@ const controller = {
                     newPost[id] = id;
                 }
 
-                res.render('showposts', {
-                    category,
-                    showposts,
-                    page,
-                    showPages,
-                    pagesNum,
-                    user,
-                });
                 db.find('users', { username: user.username })
                     .then((users) => {
                         const changingUser = users[0];
                         changingUser.posts.push(newPost);
                         db.update('users', {
-                                username: user.username,
-                            },
-                            changingUser);
+                                    username: user.username,
+                                },
+                                changingUser)
+                            .then(() => res.redirect('/posts/' + category));
                     })
                     .catch((err) => {
                         const message = 'Adding post to user posts: ' + err;
@@ -158,11 +151,6 @@ const controller = {
                         },
                         newPost)
                     .then((p) => {
-                        res.render('post', {
-                            user,
-                            category,
-                            post: newPost,
-                        });
                         db.find('users', { username: user.username })
                             .then((users) => {
                                 const foundUser = users[0];
@@ -176,7 +164,8 @@ const controller = {
                                 db.update(
                                     'users', {
                                         username: user.username,
-                                    }, foundUser);
+                                    }, foundUser).then(() => res
+                                    .redirect('/posts/' + category + '/' + id));
                             });
                     });
             })

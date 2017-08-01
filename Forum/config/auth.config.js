@@ -103,12 +103,6 @@ const configAuth = (app, database, registeredUser) => {
         }
     ));
 
-    app.use(cookieParser());
-    app.use(session({
-        secret: 'Purple Unicorn',
-        resave: true,
-        saveUninitialized: false,
-    }));
     app.use(passport.initialize());
     app.use(passport.session());
 

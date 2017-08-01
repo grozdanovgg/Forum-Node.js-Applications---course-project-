@@ -96,11 +96,6 @@ const controller = {
                         },
                         foundUser)
                     .then((p) => {
-                        res.render('post', {
-                            user,
-                            category: post.category,
-                            post,
-                        });
                         db.find('posts/' + post.category, {
                                 title: post.title,
                             })
@@ -110,7 +105,8 @@ const controller = {
                                 db.update('posts/' + post.category, {
                                         title: post.title,
                                     },
-                                    newPost);
+                                    newPost).then(res
+                                    .redirect('/users/' + username + '/' + id));
                             });
                     });
             })

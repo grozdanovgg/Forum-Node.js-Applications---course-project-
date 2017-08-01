@@ -13,7 +13,6 @@ const controller = {
     },
     logout(req, res) {
         req.logout();
-        req.app.locals.currentUser = null;
         res.redirect('/');
     },
     pictureSettings(req, res, app) {
