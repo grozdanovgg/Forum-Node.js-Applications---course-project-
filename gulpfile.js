@@ -4,7 +4,7 @@ const mocha = require('gulp-mocha');
 const { MongoClient } = require('mongodb');
 
 const config = {
-    connectionString: 'mongodb://localhost/items-db',
+    connectionString: 'mongodb://localhost/test-db',
     port: 3002,
     bodyParserType: 'url',
     categories: ['animals', 'cars', 'clothing', 'man', 'school', 'space', 'sport', 'women', 'sex', 'movies', 'music', 'programming', 'work', 'other', 'games']

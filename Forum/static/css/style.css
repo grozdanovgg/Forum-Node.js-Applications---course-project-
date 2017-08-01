@@ -7,6 +7,10 @@
 
 /* About CSS START */
 
+.row a {
+    color: black!important;
+}
+
 header.masthead {
     background: url('/static/images/backgrounds/about-us.jpg') no-repeat center center scroll;
     -webkit-background-size: cover;
