@@ -2,6 +2,7 @@ const { Router } = require('express');
 const controller = require('./about-controller');
 
 const attach = (app) => {
+    // @ts-ignore
     const router = new Router();
     router
         .get('/', (req, res) => {

@@ -1,3 +1,5 @@
+/* eslint-disable new-cap */
+// @ts-ignore
 const CryptoJS = require('crypto-js');
 
 const secretKey = 'jaS4VUDw1XPjReqHou6r';
@@ -9,4 +11,5 @@ class Crypto {
     }
 }
 
+// @ts-ignore
 module.exports = new Crypto;

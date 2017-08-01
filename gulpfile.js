@@ -3,7 +3,6 @@ const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
 const { MongoClient } = require('mongodb');
 
-
 const config = {
     connectionString: 'mongodb://localhost/items-db',
     port: 3002,

@@ -6,6 +6,7 @@ const controller = require('./auth-controller');
 
 
 const attach = (app, db) => {
+    // @ts-ignore
     const router = new Router();
     router
         .get('/login', (req, res) => {

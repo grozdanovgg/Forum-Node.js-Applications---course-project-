@@ -1,7 +1,7 @@
-const { init } = require('../../app');
+const { init } = require('../../app'); // eslint-disable-line no-unused-vars
 const config = require('./tests.config');
 const request = require('supertest');
-const { expect } = require('chai');
+const { expect } = require('chai'); // eslint-disable-line no-unused-vars
 
 describe('/users', () => {
     describe('GET /:username', () => {

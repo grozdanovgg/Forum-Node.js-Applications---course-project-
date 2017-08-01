@@ -5,4 +5,5 @@ const controller = {
     },
 };
 
+// @ts-ignore
 module.exports = controller;

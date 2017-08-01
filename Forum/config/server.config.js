@@ -13,4 +13,11 @@ const categories = ['animals', 'cars', 'clothing', 'man', 'school', 'space',
     'programming', 'work', 'other', 'games',
 ];
 
-module.exports = { port, connectionString, sessionSecret, categories, bodyParserType };
+// @ts-ignore
+module.exports = {
+    port,
+    connectionString,
+    sessionSecret,
+    categories,
+    bodyParserType,
+};

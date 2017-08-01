@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-expressions*/
+// @ts-ignore
 const { expect } = require('chai');
+// @ts-ignore
 const { setupDriver } = require('./utils/setup-driver');
-const webdriver = require('selenium-webdriver');
-const mocha = require('mocha');
+// @ts-ignore
+const mocha = require('mocha'); // eslint-disable-line no-unused-vars
+// @ts-ignore
 const ui = require('./utils/ui');
 const categories = ['animals', 'cars', 'clothing', 'man', 'school',
     'space', 'sport', 'women', 'sex', 'movies',
@@ -11,7 +14,8 @@ const categories = ['animals', 'cars', 'clothing', 'man', 'school',
 
 describe('Home', () => {
     let driver = null;
-    // Uncomment this only to get intellisence, then use driver=null for real testing
+    // Uncomment this only to get intellisence, 
+    // then use driver=null for real testing
     // let driver = new webdriver.Builder().build();
 
     const appUrl = 'http://localhost:3002';
@@ -44,7 +48,9 @@ describe('Home', () => {
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
         for (const category of categories) {
@@ -59,7 +65,9 @@ describe('Home', () => {
                         done();
                     })
                     .catch((err) => {
-                        throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                        throw new Error(
+                            'Promise was unexpectedly fulfilled. Result: ' + err
+                        );
                     });
             });
         }
@@ -80,7 +88,9 @@ describe('Home', () => {
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
         it('Expect to be able to chat, when logged in', (done) => {
@@ -91,11 +101,15 @@ describe('Home', () => {
                     return ui.getText('#messages li');
                 })
                 .then((msg) => {
-                    expect(msg).to.equals(`${username.toUpperCase()}: ${newChatMsg}`);
+                    expect(msg).to.equals(
+                        `${username.toUpperCase()}: ${newChatMsg}`
+                    );
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
         it('Expext to logout', (done) => {
@@ -109,7 +123,9 @@ describe('Home', () => {
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
     });

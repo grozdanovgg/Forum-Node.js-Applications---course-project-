@@ -4,6 +4,7 @@ const controller = require('./users-controller');
 // const pageHandler = require('../paging/paging');
 
 const attach = (app, db) => {
+    // @ts-ignore
     const router = new Router();
     router
         .get('/:username', (req, res) => {

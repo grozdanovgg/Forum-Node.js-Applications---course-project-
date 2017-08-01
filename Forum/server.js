@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
 /* eslint-disable no-process-env*/
 /* eslint-disable no-undef*/
-
 const config = require('./config/server.config');
 
 const async = () => {

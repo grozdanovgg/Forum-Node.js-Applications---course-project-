@@ -1,13 +1,15 @@
+// @ts-nocheck
 /* eslint-disable no-unused-expressions*/
-const { expect } = require('chai');
+const { expect } =
+// @ts-ignore
+require('chai');
 const { setupDriver } = require('../utils/setup-driver');
-const webdriver = require('selenium-webdriver');
-const mocha = require('mocha');
 const ui = require('../utils/ui');
 
 describe('User authentication', () => {
     let driver = null;
-    // Uncomment this only to get intellisence, then use driver=null for real testing
+    // Uncomment this only to get intellisence, 
+    // then use driver=null for real testing
     // let driver = new webdriver.Builder().build();
 
     const appUrl = 'http://localhost:3002';
@@ -55,7 +57,9 @@ describe('User authentication', () => {
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
         it('Expext to NOT ALLOW DUPLICATE user', (done) => {
@@ -72,7 +76,9 @@ describe('User authentication', () => {
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
         it('Expext to login', (done) => {
@@ -87,7 +93,9 @@ describe('User authentication', () => {
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
         it('Expext to logout again', (done) => {
@@ -101,7 +109,9 @@ describe('User authentication', () => {
                     done();
                 })
                 .catch((err) => {
-                    throw new Error('Promise was unexpectedly fulfilled. Result: ' + err);
+                    throw new Error(
+                        'Promise was unexpectedly fulfilled. Result: ' + err
+                    );
                 });
         });
     });

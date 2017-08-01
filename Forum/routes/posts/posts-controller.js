@@ -1,3 +1,4 @@
+// @ts-ignore
 const pageHandler = require('../../models/paging');
 
 const controller = {
@@ -102,7 +103,7 @@ const controller = {
                             changingUser);
                     })
                     .catch((err) => {
-                        const message = 'There was a problem addint the post to the user posts: ' + err;
+                        const message = 'Adding post to user posts: ' + err;
                         res.render('404', { user, message });
                     });
             })
@@ -176,4 +177,5 @@ const controller = {
     },
 };
 
+// @ts-ignore
 module.exports = controller;

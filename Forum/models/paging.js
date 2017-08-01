@@ -50,4 +50,5 @@ class PageHandler {
     }
 }
 
+// @ts-ignore
 module.exports = new PageHandler();

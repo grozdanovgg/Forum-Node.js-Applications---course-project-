@@ -2,6 +2,7 @@ const { Router } = require('express');
 const controller = require('./posts-controller');
 
 const attach = (app, db) => {
+    // @ts-ignore
     const router = new Router();
     router
         .get('/:category', (req, res) => {

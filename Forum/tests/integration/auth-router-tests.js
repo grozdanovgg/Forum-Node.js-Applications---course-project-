@@ -1,7 +1,7 @@
-const { init } = require('../../app');
+const { init } = require('../../app'); // eslint-disable-line no-unused-vars
 const config = require('./tests.config');
 const request = require('supertest');
-const { expect } = require('chai');
+const { expect } = require('chai'); // eslint-disable-line no-unused-vars
 const Database = require('../../database/mongodb');
 
 describe('/auth', () => {
@@ -35,6 +35,7 @@ describe('/auth', () => {
             });
             it('GET /logout expect to return 200', (done) => {
                 request(app)
+                    // @ts-ignore
                     .set('Accept', 'application/json')
                     .get('/auth/logout')
                     .expect(302)

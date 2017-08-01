@@ -1,3 +1,4 @@
+// @ts-ignore
 const webdriver = require('selenium-webdriver');
 const setupDriver = (browser) => {
     const driver =
@@ -8,4 +9,5 @@ const setupDriver = (browser) => {
     return driver;
 };
 
+// @ts-ignore
 module.exports = { setupDriver };

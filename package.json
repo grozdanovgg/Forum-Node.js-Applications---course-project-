@@ -1,4 +1,9 @@
 {
+    "name": "tellus",
+    "version": "1.0.0",
+    "main": "server.js",
+    "license": "MIT",
+    "author": "Express 8 Team (Martin Kamenov & Georgi Grozdanov)",
     "scripts": {
         "n": "node Forum/app.js",
         "start": "./node_modules/.bin/nodemon Forum/server.js",

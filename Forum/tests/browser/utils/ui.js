@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions*/
-const { setupDriver } = require('../utils/setup-driver');
+// @ts-ignore
 const webdriver = require('selenium-webdriver');
 
 let driver = null;
@@ -71,6 +71,7 @@ const click = (selector) => {
         .then((el) => el.click());
 };
 
+// @ts-ignore
 module.exports = {
     setDriver(_driver) {
         driver = _driver;

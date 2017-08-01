@@ -1,4 +1,4 @@
-/* globals __dirname, process  */
+/* globals __dirname  */
 const express = require('express');
 const posts = require('./routes/posts/posts-route');
 const users = require('./routes/users/users-route');
